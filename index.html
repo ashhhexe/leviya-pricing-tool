@@ -80,7 +80,7 @@
 
         <label>
           Markup (%)
-          <input id="markup" type="number" min="0" step="1" value="20" />
+          <input id="markup" type="number" min="0" step="1" value="40" />
         </label>
       </section>
 
@@ -89,11 +89,73 @@
 
     <script>
       const items = [
-        { id: 1, name: '1/2 in. Copper Elbow', price: 3.45, fixed: false },
-        { id: 2, name: '3/4 in. Ball Valve', price: 14.9, fixed: false },
-        { id: 3, name: 'Service Call Fee', price: 89, fixed: true },
-        { id: 4, name: 'Drain Auger Rental', price: 45, fixed: true },
-        { id: 5, name: 'PTFE Thread Seal Tape', price: 1.95, fixed: false }
+        { id: 1, name: 'Water Meter, Horizontal Type, Cast Iron Body, 1/2 in', price: 630, fixed: false },
+        { id: 2, name: 'Water Meter, Horizontal Type, Cast Iron Body, 3/4 in', price: 730, fixed: false },
+        { id: 3, name: 'Water Meter, Horizontal Type, Cast Iron Body, 1 in', price: 1140, fixed: false },
+        { id: 4, name: 'Water Meter, Horizontal Type, Cast Iron Body, 1-1/4 in', price: 2100, fixed: false },
+        { id: 5, name: 'Water Meter, Horizontal Type, Cast Iron Body, 1-1/2 in', price: 2600, fixed: false },
+        { id: 6, name: 'Water Meter, Horizontal Type, Cast Iron Body, 2 in', price: 4285, fixed: false },
+        { id: 7, name: 'Water Meter, Horizontal Type, Brass Body, 1/2 in', price: 1400, fixed: false },
+        { id: 8, name: 'Water Meter, Horizontal Type, Brass Body, 3/4 in', price: 1700, fixed: false },
+        { id: 9, name: 'Water Meter, Horizontal Type, Brass Body, 1 in', price: 2800, fixed: false },
+        { id: 10, name: 'Water Meter, Vertical Type, Cast Iron Body, 1/2 in', price: 700, fixed: false },
+        { id: 11, name: 'Water Meter, Vertical Type, Cast Iron Body, 3/4 in', price: 850, fixed: false },
+        { id: 12, name: 'Water Meter, Vertical Type, Cast Iron Body, 1 in', price: 1285, fixed: false },
+        { id: 13, name: 'Water Meter, Vertical Type, Cast Iron Body, 1-1/4 in', price: 3200, fixed: false },
+        { id: 14, name: 'Water Meter, Vertical Type, Cast Iron Body, 1-1/2 in', price: 5200, fixed: false },
+        { id: 15, name: 'Water Meter, Vertical Type, Cast Iron Body, Female Thread, 2 in', price: 4800, fixed: false },
+        { id: 16, name: 'Water Meter, Ecotech, Cast Iron Body, 1/2 in', price: 700, fixed: false },
+        { id: 17, name: 'Water Meter, Ecotech, Brass Body, 1/2 in', price: 1000, fixed: false },
+        { id: 18, name: 'Water Flow Meter, Flanged Type, 2 in', price: 11800, fixed: false },
+        { id: 19, name: 'Water Flow Meter, Flanged Type, 2-1/2 in', price: 12150, fixed: false },
+        { id: 20, name: 'Water Flow Meter, Flanged Type, 3 in', price: 13600, fixed: false },
+        { id: 21, name: 'Water Flow Meter, Flanged Type, 4 in', price: 15000, fixed: false },
+        { id: 22, name: 'Water Flow Meter, Flanged Type, 5 in', price: 18000, fixed: false },
+        { id: 23, name: 'Water Flow Meter, Flanged Type, 6 in', price: 18500, fixed: false },
+        { id: 24, name: 'Water Flow Meter, Flanged Type, 8 in', price: 22850, fixed: false },
+        { id: 25, name: 'Water Flow Meter, Flanged Type, 10 in', price: 64300, fixed: false },
+        { id: 26, name: 'Water Flow Meter, Flanged Type, 12 in', price: 71500, fixed: false },
+        { id: 27, name: 'Turbine Flow Meter, 4 in', price: 95000, fixed: false },
+        { id: 28, name: 'Aquajet Flow Meter, 2 in', price: 12350, fixed: false },
+        { id: 29, name: 'HDPE Pipe, SDR11, 20 mm x 100 m', price: 1633, fixed: false },
+        { id: 30, name: 'HDPE Pipe, SDR11, 20 mm x 300 m', price: 4899, fixed: false },
+        { id: 31, name: 'HDPE Pipe, SDR11, 32 mm x 100 m', price: 4200, fixed: false },
+        { id: 32, name: 'HDPE Pipe, SDR11, 50 mm x 60 m', price: 6192, fixed: false },
+        { id: 33, name: 'HDPE Pipe, SDR11, 75 mm x 60 m', price: 13512, fixed: false },
+        { id: 34, name: 'HDPE Pipe, SDR11, 100 mm x 6 m', price: 2870, fixed: false },
+        { id: 35, name: 'HDPE Pipe, SDR17, 225 mm x 6 m', price: 8304.84, fixed: true },
+        { id: 36, name: 'uPVC Pipe, Class 100, 2 in', price: 675, fixed: false },
+        { id: 37, name: 'uPVC Pipe, Class 100, 4 in', price: 2024, fixed: false },
+        { id: 38, name: 'uPVC Pipe, Class 100, 6 in', price: 4305, fixed: false },
+        { id: 39, name: 'uPVC Pipe, Class 150, 4 in', price: 2435, fixed: false },
+        { id: 40, name: 'uPVC Pipe, Class 150, 6 in', price: 4945, fixed: false },
+        { id: 41, name: 'uPVC Pipe, Class 150, 12 in', price: 36288, fixed: false },
+        { id: 42, name: 'uPVC Elbow, RR Type, 12 in x 90 Degree', price: 40975.2, fixed: false },
+        { id: 43, name: 'uPVC Elbow, RR Type, 12 in x 45 Degree', price: 32781.6, fixed: false },
+        { id: 44, name: 'uPVC Tee, RR Type, 12 in', price: 11671.2, fixed: false },
+        { id: 45, name: 'uPVC Flange, 12 in', price: 4838.4, fixed: false },
+        { id: 46, name: 'BI Pipe, SCH40, 25 mm', price: 770, fixed: false },
+        { id: 47, name: 'BI Pipe, SCH40, 40 mm', price: 1260, fixed: false },
+        { id: 48, name: 'BI Pipe, SCH40, 50 mm', price: 1630, fixed: false },
+        { id: 49, name: 'BI Pipe, SCH40, 80 mm', price: 3460, fixed: false },
+        { id: 50, name: 'BI Pipe, SCH40, 100 mm', price: 5290, fixed: false },
+        { id: 51, name: 'BI Elbow, Welded Type, 100 mm', price: 249, fixed: false },
+        { id: 52, name: 'BI Tee, Reducer Type, 100 mm x 50 mm', price: 450, fixed: false },
+        { id: 53, name: 'Concentric Reducer, Welded Type, 100 mm x 80 mm', price: 324, fixed: false },
+        { id: 54, name: 'GI Street Elbow, 100 mm x 90 Degree', price: 1155, fixed: false },
+        { id: 55, name: 'CI Check Valve, 100 mm', price: 4870, fixed: false },
+        { id: 56, name: 'Brass Check Valve, 50 mm', price: 1397, fixed: false },
+        { id: 57, name: 'OS&Y Gate Valve, 100 mm', price: 6515, fixed: false },
+        { id: 58, name: 'Pressure Relief Valve, 100 mm / 4 in', price: 20000, fixed: false },
+        { id: 59, name: 'Air Release Valve, F/F, 2 in', price: 5790, fixed: false },
+        { id: 60, name: 'Siamese Twin, 100 mm x 65 mm x 65 mm', price: 4800, fixed: false },
+        { id: 61, name: 'CI Fire Hydrant Head, 3 in x 2-1/2 in', price: 8600, fixed: false },
+        { id: 62, name: 'CI Fire Hydrant Head, 4 in x 2-1/2 in', price: 9620, fixed: false },
+        { id: 63, name: 'Mech Groove Elbow, 45 Degree, 2 in', price: 211.4, fixed: true },
+        { id: 64, name: 'Mech Groove Elbow, 90 Degree, 4 in', price: 814.8, fixed: true },
+        { id: 65, name: 'Mech Groove Coupling, 4 in', price: 630, fixed: true },
+        { id: 66, name: 'Mech Groove Tee, 4 in', price: 1243.2, fixed: true },
+        { id: 67, name: 'Mech Flange Adapter, 4 in', price: 999.6, fixed: true }
       ];
 
       const searchInput = document.getElementById('search');
@@ -102,7 +164,7 @@
       let copiedId = null;
 
       const toCurrency = (value) =>
-        new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value);
+        new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(value);
 
       const markedPrice = (item, markupPercent) => {
         if (item.fixed) {
