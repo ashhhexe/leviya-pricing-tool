@@ -45,6 +45,23 @@
         font-size: 1rem;
       }
 
+      .category-bar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .category-btn {
+        background: #e2e8f0;
+        color: #0f172a;
+      }
+
+      .category-btn.active {
+        background: #2563eb;
+        color: white;
+      }
+
       .item-grid {
         display: grid;
         gap: 1rem;
@@ -84,6 +101,7 @@
         </label>
       </section>
 
+      <section id="category-bar" class="category-bar"></section>
       <section id="item-grid" class="item-grid"></section>
     </main>
 
@@ -158,10 +176,52 @@
         { id: 67, name: 'Mech Flange Adapter, 4 in', price: 999.6, fixed: true }
       ];
 
+      const categories = [
+        'All',
+        'BI Fittings',
+        'GI Fittings',
+        'BI/GI Pipes',
+        'PVC/uPVC',
+        'HDPE',
+        'Valves',
+        'Fire Protection',
+        'Meters',
+        'Pumps',
+        'Electrical',
+        'Flanges',
+        'Accessories'
+      ];
+
+      const inferCategories = (name) => {
+        const n = name.toLowerCase();
+        const set = new Set();
+
+        if (n.includes('meter')) set.add('Meters');
+        if (n.includes('pump')) set.add('Pumps');
+        if (n.includes('hdpe')) set.add('HDPE');
+        if (n.includes('upvc') || n.includes('pvc')) set.add('PVC/uPVC');
+        if (n.includes('bi pipe') || n.includes('gi pipe')) set.add('BI/GI Pipes');
+        if (n.includes('bi ') && (n.includes('elbow') || n.includes('tee') || n.includes('reducer'))) set.add('BI Fittings');
+        if (n.includes('gi ') && (n.includes('elbow') || n.includes('tee') || n.includes('reducer'))) set.add('GI Fittings');
+        if (n.includes('valve')) set.add('Valves');
+        if (n.includes('fire') || n.includes('hydrant') || n.includes('siamese') || n.includes('mech groove')) set.add('Fire Protection');
+        if (n.includes('flange')) set.add('Flanges');
+        if (set.size === 0) set.add('Accessories');
+
+        return Array.from(set);
+      };
+
+      const normalizeItems = items.map((item) => ({
+        ...item,
+        categories: item.categories && item.categories.length ? item.categories : inferCategories(item.name)
+      }));
+
       const searchInput = document.getElementById('search');
       const markupInput = document.getElementById('markup');
       const itemGrid = document.getElementById('item-grid');
+      const categoryBar = document.getElementById('category-bar');
       let copiedId = null;
+      let activeCategory = 'All';
 
       const toCurrency = (value) =>
         new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(value);
@@ -174,14 +234,55 @@
         return item.price * (1 + markupPercent / 100);
       };
 
+      const getEquivalentInches = (name) => {
+        const mmMatch = name.match(/(\d+(?:\.\d+)?)\s*mm/i);
+        if (!mmMatch) return '';
+
+        const mm = Number(mmMatch[1]);
+        const inches = Math.round(mm / 25.4);
+        return `${mm}mm ≈ ${inches} in`;
+      };
+
+      const toSearchableText = (item) => {
+        const equivalentSize = getEquivalentInches(item.name);
+        return `${item.name} ${item.categories.join(' ')} ${equivalentSize}`.toLowerCase();
+      };
+
+      const renderCategories = () => {
+        categoryBar.innerHTML = '';
+        categories.forEach((category) => {
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.className = `category-btn${category === activeCategory ? ' active' : ''}`;
+          button.textContent = category;
+          button.addEventListener('click', () => {
+            activeCategory = category;
+            render();
+          });
+          categoryBar.appendChild(button);
+        });
+      };
+
       const render = () => {
         const query = searchInput.value.trim().toLowerCase();
         const markupPercent = Number(markupInput.value) || 0;
-        const filtered = items.filter((item) => item.name.toLowerCase().includes(query));
+        const deduped = new Map();
 
+        normalizeItems.forEach((item) => {
+          const inCategory = activeCategory === 'All' || item.categories.includes(activeCategory);
+          if (!inCategory) return;
+
+          if (!query || toSearchableText(item).includes(query)) {
+            deduped.set(item.id, item);
+          }
+        });
+
+        const filtered = Array.from(deduped.values());
         itemGrid.innerHTML = '';
+        renderCategories();
 
         filtered.forEach((item) => {
+          const equivalentSize = getEquivalentInches(item.name);
           const card = document.createElement('article');
           card.className = 'item-card';
 
@@ -189,6 +290,7 @@
             <h2>${item.name}</h2>
             <p>Base: ${toCurrency(item.price)}</p>
             <p>Final: <strong>${toCurrency(markedPrice(item, markupPercent))}</strong></p>
+            ${equivalentSize ? `<p>Equivalent size: ${equivalentSize}</p>` : ''}
             <p>${item.fixed ? 'Fixed price item' : `Markup applied: ${markupPercent}%`}</p>
             <button type="button">${copiedId === item.id ? 'Copied!' : 'Copy item name'}</button>
           `;
