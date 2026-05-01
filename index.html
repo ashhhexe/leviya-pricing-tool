@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Leviya Pricing Tool</title>
+    <style>
+      :root {
+        font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+        color: #0f172a;
+        background: #f1f5f9;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+      }
+
+      .app {
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 2rem 1rem 3rem;
+      }
+
+      .controls {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        margin-bottom: 1.5rem;
+      }
+
+      label {
+        display: grid;
+        gap: 0.35rem;
+        font-weight: 600;
+      }
+
+      input {
+        border: 1px solid #cbd5e1;
+        border-radius: 0.5rem;
+        padding: 0.65rem;
+        font-size: 1rem;
+      }
+
+      .item-grid {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .item-card {
+        background: white;
+        border-radius: 0.75rem;
+        padding: 1rem;
+        border: 1px solid #e2e8f0;
+      }
+
+      button {
+        border: none;
+        border-radius: 0.5rem;
+        padding: 0.6rem 0.8rem;
+        background: #2563eb;
+        color: white;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="app">
+      <h1>Leviya Pricing Tool</h1>
+
+      <section class="controls">
+        <label>
+          Search items
+          <input id="search" type="search" placeholder="Type to filter items" />
+        </label>
+
+        <label>
+          Markup (%)
+          <input id="markup" type="number" min="0" step="1" value="20" />
+        </label>
+      </section>
+
+      <section id="item-grid" class="item-grid"></section>
+    </main>
+
+    <script>
+      const items = [
+        { id: 1, name: '1/2 in. Copper Elbow', price: 3.45, fixed: false },
+        { id: 2, name: '3/4 in. Ball Valve', price: 14.9, fixed: false },
+        { id: 3, name: 'Service Call Fee', price: 89, fixed: true },
+        { id: 4, name: 'Drain Auger Rental', price: 45, fixed: true },
+        { id: 5, name: 'PTFE Thread Seal Tape', price: 1.95, fixed: false }
+      ];
+
+      const searchInput = document.getElementById('search');
+      const markupInput = document.getElementById('markup');
+      const itemGrid = document.getElementById('item-grid');
+      let copiedId = null;
+
+      const toCurrency = (value) =>
+        new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value);
+
+      const markedPrice = (item, markupPercent) => {
+        if (item.fixed) {
+          return item.price;
+        }
+
+        return item.price * (1 + markupPercent / 100);
+      };
+
+      const render = () => {
+        const query = searchInput.value.trim().toLowerCase();
+        const markupPercent = Number(markupInput.value) || 0;
+        const filtered = items.filter((item) => item.name.toLowerCase().includes(query));
+
+        itemGrid.innerHTML = '';
+
+        filtered.forEach((item) => {
+          const card = document.createElement('article');
+          card.className = 'item-card';
+
+          card.innerHTML = `
+            <h2>${item.name}</h2>
+            <p>Base: ${toCurrency(item.price)}</p>
+            <p>Final: <strong>${toCurrency(markedPrice(item, markupPercent))}</strong></p>
+            <p>${item.fixed ? 'Fixed price item' : `Markup applied: ${markupPercent}%`}</p>
+            <button type="button">${copiedId === item.id ? 'Copied!' : 'Copy item name'}</button>
+          `;
+
+          const button = card.querySelector('button');
+          button.addEventListener('click', async () => {
+            try {
+              await navigator.clipboard.writeText(item.name);
+            } catch (_error) {
+              const textarea = document.createElement('textarea');
+              textarea.value = item.name;
+              document.body.appendChild(textarea);
+              textarea.select();
+              document.execCommand('copy');
+              textarea.remove();
+            }
+
+            copiedId = item.id;
+            render();
+            window.setTimeout(() => {
+              if (copiedId === item.id) {
+                copiedId = null;
+                render();
+              }
+            }, 1200);
+          });
+
+          itemGrid.appendChild(card);
+        });
+      };
+
+      searchInput.addEventListener('input', render);
+      markupInput.addEventListener('input', render);
+      render();
+    </script>
+  </body>
+</html>
