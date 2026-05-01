@@ -10,99 +10,67 @@
         color: #0f172a;
         background: #f1f5f9;
       }
-
-      * {
-        box-sizing: border-box;
-      }
-
-      body {
-        margin: 0;
-      }
-
-      .app {
-        max-width: 980px;
-        margin: 0 auto;
-        padding: 2rem 1rem 3rem;
-      }
-
-      .controls {
-        display: grid;
-        gap: 1rem;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        margin-bottom: 1.5rem;
-      }
-
-      label {
-        display: grid;
-        gap: 0.35rem;
-        font-weight: 600;
-      }
-
-      input {
-        border: 1px solid #cbd5e1;
-        border-radius: 0.5rem;
-        padding: 0.65rem;
-        font-size: 1rem;
-      }
-
-      .category-bar {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-        margin-bottom: 1rem;
-      }
-
-      .category-btn {
-        background: #e2e8f0;
-        color: #0f172a;
-      }
-
-      .category-btn.active {
-        background: #2563eb;
-        color: white;
-      }
-
-      .item-grid {
-        display: grid;
-        gap: 1rem;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      }
-
-      .item-card {
-        background: white;
-        border-radius: 0.75rem;
-        padding: 1rem;
-        border: 1px solid #e2e8f0;
-      }
-
-      button {
-        border: none;
-        border-radius: 0.5rem;
-        padding: 0.6rem 0.8rem;
-        background: #2563eb;
-        color: white;
-        cursor: pointer;
-      }
+      * { box-sizing: border-box; }
+      body { margin: 0; }
+      .app { max-width: 1360px; margin: 0 auto; padding: 1rem; }
+      .layout { display: grid; grid-template-columns: 220px 1fr; gap: 1rem; min-height: 90vh; }
+      .side-menu { background: #0f172a; color: white; border-radius: 0.75rem; padding: 1rem; display: grid; gap: 0.6rem; align-content: start; }
+      .menu-btn { width: 100%; text-align: left; background: #1e293b; color: #e2e8f0; }
+      .menu-btn.active { background: #2563eb; color: white; }
+      .content-area { display: grid; gap: 1rem; }
+      .workspace { display: grid; grid-template-columns: minmax(0, 1fr) minmax(300px, 36%); gap: 1rem; align-items: start; }
+      .workspace.panel-closed { grid-template-columns: minmax(0, 1fr); }
+      .workspace.panel-maximized { grid-template-columns: minmax(260px, 24%) minmax(0, 1fr); }
+      .pricelist { background: #fff; border: 1px solid #e2e8f0; border-radius: 0.75rem; padding: 1rem; }
+      .controls { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin-bottom: 1rem; }
+      label { display: grid; gap: 0.35rem; font-weight: 600; }
+      input { border: 1px solid #cbd5e1; border-radius: 0.5rem; padding: 0.65rem; font-size: 1rem; }
+      .category-bar { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
+      button { border: none; border-radius: 0.5rem; padding: 0.6rem 0.8rem; background: #2563eb; color: white; cursor: pointer; }
+      .category-btn { background: #e2e8f0; color: #0f172a; }
+      .category-btn.active { background: #2563eb; color: white; }
+      .item-grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+      .item-card { background: white; border-radius: 0.75rem; padding: 1rem; border: 1px solid #e2e8f0; display: grid; gap: 0.45rem; }
+      .item-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+      .toggle-btn.selected { background: #dc2626; }
+      .side-panel { background: #fff; border: 1px solid #e2e8f0; border-radius: 0.75rem; padding: 1rem; display: grid; gap: 0.75rem; }
+      .side-panel.minimized .panel-content { display: none; }
+      .panel-head { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
+      .panel-actions { display: flex; gap: 0.4rem; }
+      table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+      th, td { border: 1px solid #e2e8f0; padding: 0.4rem; text-align: left; }
+      .money { text-align: right; white-space: nowrap; }
+      .calc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.35rem; }
+      .calc-display { font-size: 1.1rem; font-weight: 700; border: 1px solid #cbd5e1; border-radius: 0.5rem; padding: 0.6rem; text-align: right; }
+      .qa-result { border: 1px solid #cbd5e1; border-radius: 0.5rem; padding: 0.6rem; background: #f8fafc; }
+      .quotation-summary { display: grid; gap: 0.35rem; justify-items: end; }
+      .small-note { font-size: 0.85rem; color: #475569; }
     </style>
   </head>
   <body>
     <main class="app">
       <h1>Leviya Pricing Tool</h1>
-
-      <section class="controls">
-        <label>
-          Search items
-          <input id="search" type="search" placeholder="Type to filter items" />
-        </label>
-
-        <label>
-          Markup (%)
-          <input id="markup" type="number" min="0" step="1" value="40" />
-        </label>
-      </section>
-
-      <section id="category-bar" class="category-bar"></section>
-      <section id="item-grid" class="item-grid"></section>
+      <div class="layout">
+        <aside class="side-menu">
+          <button class="menu-btn active" data-tab="pricelist">Pricelist</button>
+          <button class="menu-btn" data-tab="calculator">Calculator</button>
+          <button class="menu-btn" data-tab="quotation">Quotation</button>
+          <button class="menu-btn" data-tab="qa">Q&amp;A Helper</button>
+        </aside>
+        <section class="content-area">
+          <div id="workspace" class="workspace panel-closed">
+            <section class="pricelist">
+              <section class="controls">
+                <label>Search items <input id="search" type="search" placeholder="Type to filter items" /></label>
+                <label>Markup (%) <input id="markup" type="number" min="0" step="1" value="40" /></label>
+              </section>
+              <section id="category-bar" class="category-bar"></section>
+              <section id="item-grid" class="item-grid"></section>
+            </section>
+            <aside id="side-panel" class="side-panel" hidden></aside>
+          </div>
+        </section>
+      </div>
     </main>
 
     <script>
@@ -176,154 +144,126 @@
         { id: 67, name: 'Mech Flange Adapter, 4 in', price: 999.6, fixed: true }
       ];
 
-      const categories = [
-        'All',
-        'BI Fittings',
-        'GI Fittings',
-        'BI/GI Pipes',
-        'PVC/uPVC',
-        'HDPE',
-        'Valves',
-        'Fire Protection',
-        'Meters',
-        'Pumps',
-        'Electrical',
-        'Flanges',
-        'Accessories'
+      const categories = ['All', 'BI Fittings', 'GI Fittings', 'BI/GI Pipes', 'PVC/uPVC', 'HDPE', 'Valves', 'Fire Protection', 'Meters', 'Pumps', 'Electrical', 'Flanges', 'Accessories'];
+      const manualQA = [
+        { q: 'What is the payment term?', a: '50% payment to proceed with the order and 50% payment upon delivery/shipment.' },
+        { q: 'What is price validity?', a: '5 days.' },
+        { q: 'What is delivery schedule?', a: '2–5 days for on-stock items and 5–6 weeks for indent orders.' },
+        { q: 'Are returns allowed?', a: 'No return or replacement unless the item has factory defect.' }
       ];
 
       const inferCategories = (name) => {
-        const n = name.toLowerCase();
-        const set = new Set();
-
-        if (n.includes('meter')) set.add('Meters');
-        if (n.includes('pump')) set.add('Pumps');
-        if (n.includes('hdpe')) set.add('HDPE');
-        if (n.includes('upvc') || n.includes('pvc')) set.add('PVC/uPVC');
-        if (n.includes('bi pipe') || n.includes('gi pipe')) set.add('BI/GI Pipes');
+        const n = name.toLowerCase(); const set = new Set();
+        if (n.includes('meter')) set.add('Meters'); if (n.includes('pump')) set.add('Pumps'); if (n.includes('hdpe')) set.add('HDPE');
+        if (n.includes('upvc') || n.includes('pvc')) set.add('PVC/uPVC'); if (n.includes('bi pipe') || n.includes('gi pipe')) set.add('BI/GI Pipes');
         if (n.includes('bi ') && (n.includes('elbow') || n.includes('tee') || n.includes('reducer'))) set.add('BI Fittings');
         if (n.includes('gi ') && (n.includes('elbow') || n.includes('tee') || n.includes('reducer'))) set.add('GI Fittings');
-        if (n.includes('valve')) set.add('Valves');
-        if (n.includes('fire') || n.includes('hydrant') || n.includes('siamese') || n.includes('mech groove')) set.add('Fire Protection');
-        if (n.includes('flange')) set.add('Flanges');
-        if (set.size === 0) set.add('Accessories');
+        if (n.includes('valve')) set.add('Valves'); if (n.includes('fire') || n.includes('hydrant') || n.includes('siamese') || n.includes('mech groove')) set.add('Fire Protection');
+        if (n.includes('flange')) set.add('Flanges'); if (set.size === 0) set.add('Accessories'); return Array.from(set);
+      };
+      const normalizeItems = items.map((item) => ({ ...item, categories: item.categories?.length ? item.categories : inferCategories(item.name) }));
+      const toCurrency = (value) => new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(value);
+      const markedPrice = (item, markupPercent) => item.fixed ? item.price : item.price * (1 + markupPercent / 100);
+      const getEquivalentInches = (name) => { const m = name.match(/(\d+(?:\.\d+)?)\s*mm/i); if (!m) return ''; return `${m[1]}mm ≈ ${Math.round(Number(m[1]) / 25.4)} in`; };
 
-        return Array.from(set);
+      const state = { activeCategory: 'All', activePanelTab: 'pricelist', panelOpen: false, panelMaximized: false, panelMinimized: false, copiedId: null, quote: new Map(), discount: 0, calcDisplay: '0' };
+      const el = {
+        search: document.getElementById('search'), markup: document.getElementById('markup'), grid: document.getElementById('item-grid'), categories: document.getElementById('category-bar'),
+        workspace: document.getElementById('workspace'), panel: document.getElementById('side-panel'), menuBtns: Array.from(document.querySelectorAll('.menu-btn'))
       };
 
-      const normalizeItems = items.map((item) => ({
-        ...item,
-        categories: item.categories && item.categories.length ? item.categories : inferCategories(item.name)
-      }));
-
-      const searchInput = document.getElementById('search');
-      const markupInput = document.getElementById('markup');
-      const itemGrid = document.getElementById('item-grid');
-      const categoryBar = document.getElementById('category-bar');
-      let copiedId = null;
-      let activeCategory = 'All';
-
-      const toCurrency = (value) =>
-        new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(value);
-
-      const markedPrice = (item, markupPercent) => {
-        if (item.fixed) {
-          return item.price;
-        }
-
-        return item.price * (1 + markupPercent / 100);
-      };
-
-      const getEquivalentInches = (name) => {
-        const mmMatch = name.match(/(\d+(?:\.\d+)?)\s*mm/i);
-        if (!mmMatch) return '';
-
-        const mm = Number(mmMatch[1]);
-        const inches = Math.round(mm / 25.4);
-        return `${mm}mm ≈ ${inches} in`;
-      };
-
-      const toSearchableText = (item) => {
-        const equivalentSize = getEquivalentInches(item.name);
-        return `${item.name} ${item.categories.join(' ')} ${equivalentSize}`.toLowerCase();
+      const openPanel = (tab) => { state.activePanelTab = tab; state.panelOpen = tab !== 'pricelist'; render(); };
+      const toggleQuote = (item) => {
+        if (state.quote.has(item.id)) state.quote.delete(item.id);
+        else state.quote.set(item.id, { itemId: item.id, qty: 1, unit: 'pc' });
+        render();
       };
 
       const renderCategories = () => {
-        categoryBar.innerHTML = '';
-        categories.forEach((category) => {
-          const button = document.createElement('button');
-          button.type = 'button';
-          button.className = `category-btn${category === activeCategory ? ' active' : ''}`;
-          button.textContent = category;
-          button.addEventListener('click', () => {
-            activeCategory = category;
-            render();
-          });
-          categoryBar.appendChild(button);
+        el.categories.innerHTML = '';
+        categories.forEach((c) => { const b = document.createElement('button'); b.className = `category-btn${c === state.activeCategory ? ' active' : ''}`; b.textContent = c; b.onclick = () => { state.activeCategory = c; render(); }; el.categories.appendChild(b); });
+      };
+
+      const renderItems = () => {
+        const query = el.search.value.trim().toLowerCase(); const markupPercent = Number(el.markup.value) || 0; const deduped = new Map();
+        normalizeItems.forEach((item) => {
+          const inCategory = state.activeCategory === 'All' || item.categories.includes(state.activeCategory);
+          if (inCategory && (!query || `${item.name} ${item.categories.join(' ')} ${getEquivalentInches(item.name)}`.toLowerCase().includes(query))) deduped.set(item.id, item);
         });
+        el.grid.innerHTML = '';
+        Array.from(deduped.values()).forEach((item) => {
+          const selected = state.quote.has(item.id); const eq = getEquivalentInches(item.name);
+          const card = document.createElement('article'); card.className = 'item-card';
+          card.innerHTML = `<h2>${item.name}</h2><p>Base: ${toCurrency(item.price)}</p><p>Final: <strong>${toCurrency(markedPrice(item, markupPercent))}</strong></p>${eq ? `<p>Equivalent size: ${eq}</p>` : ''}<p>${item.fixed ? 'Fixed price item' : `Markup applied: ${markupPercent}%`}</p><div class="item-actions"><button type="button" data-copy>${state.copiedId === item.id ? 'Copied!' : 'Copy item name'}</button><button type="button" class="toggle-btn ${selected ? 'selected' : ''}" data-quote>${selected ? 'Remove from Quotation' : 'Add to Quotation'}</button></div>`;
+          card.querySelector('[data-copy]').onclick = async () => { try { await navigator.clipboard.writeText(`${item.name}\t${toCurrency(markedPrice(item, markupPercent))}`); } catch { } state.copiedId = item.id; render(); setTimeout(() => { state.copiedId = null; render(); }, 1200); };
+          card.querySelector('[data-quote]').onclick = () => toggleQuote(item);
+          el.grid.appendChild(card);
+        });
+      };
+
+      const renderCalculator = () => {
+        const buttons = ['7', '8', '9', '/', '4', '5', '6', '*', '1', '2', '3', '-', '0', '.', '=', '+'];
+        return `<div class="panel-content"><div class="calc-display">${state.calcDisplay}</div><div class="calc-grid">${buttons.map((b) => `<button data-calc="${b}">${b}</button>`).join('')}<button data-calc="C">C</button></div></div>`;
+      };
+
+      const renderQuotation = () => {
+        const markupPercent = Number(el.markup.value) || 0;
+        const rows = Array.from(state.quote.values()).map((row, idx) => {
+          const item = normalizeItems.find((x) => x.id === row.itemId); const unitCost = markedPrice(item, markupPercent); const amount = row.qty * unitCost;
+          return { idx: idx + 1, ...row, item, unitCost, amount };
+        });
+        const subtotal = rows.reduce((sum, r) => sum + r.amount, 0); const discount = Number(state.discount) || 0; const grand = subtotal - discount;
+        return `<div class="panel-content"><button data-copy-quote>Copy quotation table</button><div class="small-note">ITEM | QTY | UNIT | DESCRIPTION | UNIT COST | AMOUNT</div><table><thead><tr><th>ITEM</th><th>QTY</th><th>UNIT</th><th>DESCRIPTION</th><th>UNIT COST</th><th>AMOUNT</th><th></th></tr></thead><tbody>${rows.map((r) => `<tr><td>${r.idx}</td><td><input type="number" min="0" step="1" value="${r.qty}" data-qty="${r.itemId}" /></td><td><input value="${r.unit}" data-unit="${r.itemId}" /></td><td>${r.item.name}</td><td class="money">${toCurrency(r.unitCost)}</td><td class="money">${toCurrency(r.amount)}</td><td><button data-remove="${r.itemId}">X</button></td></tr>`).join('')}</tbody></table><div class="quotation-summary"><div>SUBTOTAL: <strong>${toCurrency(subtotal)}</strong></div><label>LESS: Discount <input id="discount" type="number" step="0.01" min="0" value="${discount}" /></label><div>GRAND TOTAL: <strong>${toCurrency(grand)}</strong></div></div></div>`;
+      };
+
+      const renderQA = () => `<div class="panel-content"><label>Ask FAQ <input id="qa-input" placeholder="Type your question" /></label><button data-ask>Search Answer</button><div id="qa-result" class="qa-result"></div></div>`;
+
+      const renderPanel = () => {
+        el.panel.hidden = !state.panelOpen;
+        el.workspace.className = `workspace${state.panelOpen ? '' : ' panel-closed'}${state.panelMaximized ? ' panel-maximized' : ''}`;
+        if (!state.panelOpen) return;
+        const titleMap = { calculator: 'Calculator', quotation: 'Quotation', qa: 'Q&A Helper' };
+        const body = state.activePanelTab === 'calculator' ? renderCalculator() : state.activePanelTab === 'quotation' ? renderQuotation() : renderQA();
+        el.panel.className = `side-panel${state.panelMinimized ? ' minimized' : ''}`;
+        el.panel.innerHTML = `<div class="panel-head"><h2>${titleMap[state.activePanelTab]}</h2><div class="panel-actions"><button data-min>${state.panelMinimized ? 'Restore' : 'Minimize'}</button><button data-max>${state.panelMaximized ? 'Normal' : 'Maximize'}</button><button data-close>Close</button></div></div>${body}`;
+
+        el.panel.querySelector('[data-close]').onclick = () => { state.panelOpen = false; state.activePanelTab = 'pricelist'; render(); };
+        el.panel.querySelector('[data-max]').onclick = () => { state.panelMaximized = !state.panelMaximized; render(); };
+        el.panel.querySelector('[data-min]').onclick = () => { state.panelMinimized = !state.panelMinimized; render(); };
+
+        if (state.activePanelTab === 'calculator') {
+          el.panel.querySelectorAll('[data-calc]').forEach((b) => b.onclick = () => { const v = b.dataset.calc; if (v === 'C') state.calcDisplay = '0'; else if (v === '=') { try { state.calcDisplay = String(Function(`return (${state.calcDisplay})`)()); } catch { state.calcDisplay = 'Error'; } } else { state.calcDisplay = state.calcDisplay === '0' || state.calcDisplay === 'Error' ? v : state.calcDisplay + v; } renderPanel(); });
+        }
+        if (state.activePanelTab === 'quotation') {
+          el.panel.querySelectorAll('[data-remove]').forEach((b) => b.onclick = () => { state.quote.delete(Number(b.dataset.remove)); render(); });
+          el.panel.querySelectorAll('[data-qty]').forEach((i) => i.oninput = () => { const id = Number(i.dataset.qty); const row = state.quote.get(id); row.qty = Math.max(0, Number(i.value) || 0); state.quote.set(id, row); renderPanel(); });
+          el.panel.querySelectorAll('[data-unit]').forEach((i) => i.oninput = () => { const id = Number(i.dataset.unit); const row = state.quote.get(id); row.unit = i.value || 'pc'; state.quote.set(id, row); });
+          el.panel.querySelector('#discount').oninput = (e) => { state.discount = Number(e.target.value) || 0; renderPanel(); };
+          el.panel.querySelector('[data-copy-quote]').onclick = async () => {
+            const markupPercent = Number(el.markup.value) || 0; const lines = ['ITEM\tQTY\tUNIT\tDESCRIPTION\tUNIT COST\tAMOUNT']; let subtotal = 0;
+            Array.from(state.quote.values()).forEach((r, i) => { const item = normalizeItems.find((x) => x.id === r.itemId); const unitCost = markedPrice(item, markupPercent); const amount = unitCost * r.qty; subtotal += amount; lines.push(`${i + 1}\t${r.qty}\t${r.unit}\t${item.name}\t${unitCost.toFixed(2)}\t${amount.toFixed(2)}`); });
+            lines.push(`\t\t\t\tSUBTOTAL\t${subtotal.toFixed(2)}`); lines.push(`\t\t\t\tLESS: Discount\t${(Number(state.discount) || 0).toFixed(2)}`); lines.push(`\t\t\t\tGRAND TOTAL\t${(subtotal - (Number(state.discount) || 0)).toFixed(2)}`);
+            await navigator.clipboard.writeText(lines.join('\n'));
+          };
+        }
+        if (state.activePanelTab === 'qa') {
+          const result = el.panel.querySelector('#qa-result');
+          el.panel.querySelector('[data-ask]').onclick = () => {
+            const q = el.panel.querySelector('#qa-input').value.trim().toLowerCase();
+            const hit = manualQA.find((x) => q && (x.q.toLowerCase().includes(q) || q.includes(x.q.toLowerCase().replace(/[?]/g, ''))));
+            if (hit) result.innerHTML = `<strong>Answer:</strong> ${hit.a}<br><em>Source: Manual Info</em>`;
+            else result.innerHTML = `<strong>Answer:</strong> I don’t have this in the saved info yet. Please verify before replying to client.<br><em>Source: AI-style suggestion / Not verified</em>`;
+          };
+        }
       };
 
       const render = () => {
-        const query = searchInput.value.trim().toLowerCase();
-        const markupPercent = Number(markupInput.value) || 0;
-        const deduped = new Map();
-
-        normalizeItems.forEach((item) => {
-          const inCategory = activeCategory === 'All' || item.categories.includes(activeCategory);
-          if (!inCategory) return;
-
-          if (!query || toSearchableText(item).includes(query)) {
-            deduped.set(item.id, item);
-          }
-        });
-
-        const filtered = Array.from(deduped.values());
-        itemGrid.innerHTML = '';
-        renderCategories();
-
-        filtered.forEach((item) => {
-          const equivalentSize = getEquivalentInches(item.name);
-          const card = document.createElement('article');
-          card.className = 'item-card';
-
-          card.innerHTML = `
-            <h2>${item.name}</h2>
-            <p>Base: ${toCurrency(item.price)}</p>
-            <p>Final: <strong>${toCurrency(markedPrice(item, markupPercent))}</strong></p>
-            ${equivalentSize ? `<p>Equivalent size: ${equivalentSize}</p>` : ''}
-            <p>${item.fixed ? 'Fixed price item' : `Markup applied: ${markupPercent}%`}</p>
-            <button type="button">${copiedId === item.id ? 'Copied!' : 'Copy item name'}</button>
-          `;
-
-          const button = card.querySelector('button');
-          button.addEventListener('click', async () => {
-            try {
-              await navigator.clipboard.writeText(item.name);
-            } catch (_error) {
-              const textarea = document.createElement('textarea');
-              textarea.value = item.name;
-              document.body.appendChild(textarea);
-              textarea.select();
-              document.execCommand('copy');
-              textarea.remove();
-            }
-
-            copiedId = item.id;
-            render();
-            window.setTimeout(() => {
-              if (copiedId === item.id) {
-                copiedId = null;
-                render();
-              }
-            }, 1200);
-          });
-
-          itemGrid.appendChild(card);
-        });
+        el.menuBtns.forEach((b) => b.classList.toggle('active', b.dataset.tab === state.activePanelTab));
+        renderCategories(); renderItems(); renderPanel();
       };
 
-      searchInput.addEventListener('input', render);
-      markupInput.addEventListener('input', render);
+      el.search.addEventListener('input', render); el.markup.addEventListener('input', render);
+      el.menuBtns.forEach((b) => b.addEventListener('click', () => openPanel(b.dataset.tab)));
       render();
     </script>
   </body>
