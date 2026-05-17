@@ -1,53 +1,3 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Leviya Pricing Tool</title>
-    <style>
-      :root { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; color: #0f172a; background: #f1f5f9; }
-      * { box-sizing: border-box; }
-      body { margin: 0; }
-      .app { max-width: 1360px; margin: 0 auto; padding: 1rem; }
-      .pricelist { background: #fff; border: 1px solid #e2e8f0; border-radius: 0.75rem; padding: 1rem; min-height: 86vh; }
-      .controls { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin-bottom: 1rem; }
-      label { display: grid; gap: 0.35rem; font-weight: 600; }
-      input, select { border: 1px solid #cbd5e1; border-radius: 0.5rem; padding: 0.65rem; font-size: 1rem; }
-      .category-bar { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
-      button { border: none; border-radius: 0.5rem; padding: 0.55rem 0.75rem; background: #2563eb; color: white; cursor: pointer; }
-      .category-btn { background: #e2e8f0; color: #0f172a; }
-      .category-btn.active { background: #2563eb; color: white; }
-      .item-grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
-      .item-card { background: white; border-radius: 0.75rem; padding: 1rem; border: 1px solid #e2e8f0; display: grid; gap: 0.45rem; }
-      .item-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
-      .toggle-btn.selected { background: #dc2626; }
-      .dock { position: fixed; top: 50%; right: -52px; transform: translateY(-50%); background: #0f172a; border-radius: 12px 0 0 12px; padding: .5rem .35rem; display: grid; gap: .45rem; z-index: 9999; transition: right .2s ease; }
-      body:hover .dock, .dock:hover { right: 0; }
-      .dock-btn { width: 40px; height: 40px; display: grid; place-items: center; background: #1e293b; border-radius: 10px; font-size: 1.1rem; }
-      .dock-btn.active { background: #2563eb; }
-      .widget { position: fixed; background: #fff; border: 1px solid #cbd5e1; border-radius: .75rem; box-shadow: 0 18px 45px rgba(15,23,42,.25); z-index: 2000; resize: both; overflow: auto; min-width: 320px; min-height: 180px; }
-      .widget[hidden] { display: none; }
-      .widget-header { display: flex; justify-content: space-between; align-items: center; gap: .5rem; padding: .5rem .65rem; border-bottom: 1px solid #e2e8f0; background: #f8fafc; cursor: move; position: sticky; top: 0; }
-      .widget-actions { display: flex; gap: .35rem; }
-      .widget-body { padding: .7rem; }
-      .calc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: .35rem; }
-      .calc-display { font-size: 1.1rem; font-weight: 700; border: 1px solid #cbd5e1; border-radius: 0.5rem; padding: 0.6rem; text-align: right; margin-bottom: .5rem; }
-      table { width: 100%; border-collapse: collapse; font-size: .9rem; }
-      th, td { border: 1px solid #e2e8f0; padding: .38rem; text-align: left; }
-      .money { text-align: right; white-space: nowrap; }
-      .quotation-summary { display: grid; gap: .35rem; justify-items: end; margin-top: .5rem; }
-      .qa-result { border: 1px solid #cbd5e1; border-radius: 0.5rem; padding: 0.6rem; background: #f8fafc; margin-top: .45rem; }
-      .small-note { font-size: .85rem; color: #475569; }
-      .auto-quote-input { width: 100%; min-height: 130px; border: 1px solid #cbd5e1; border-radius: .5rem; padding: .65rem; font-size: .95rem; font-family: inherit; }
-      .auto-quote-actions { display: flex; gap: .45rem; flex-wrap: wrap; margin: .6rem 0; }
-      .auto-quote-table td input, .auto-quote-table td select { width: 100%; padding: .4rem; font-size: .85rem; }
-    </style>
-  </head>
-  <body>
-    <main class="app"><h1>Leviya Pricing Tool</h1><section class="pricelist"><section class="controls"><label>Search items <input id="search" type="search" placeholder="Type to filter items" /></label><label>Markup (%) <input id="markup" type="number" min="0" step="1" value="40" /></label></section><section id="category-bar" class="category-bar"></section><section id="item-grid" class="item-grid"></section></section></main>
-    <aside class="dock" id="dock"></aside>
-    <section id="widgets"></section>
-<script>
 const items = [
 { id: 1, name: 'Water Meter, Horizontal Type, Cast Iron Body, 1/2 in', price: 630, fixed: false },
 { id: 2, name: 'Water Meter, Horizontal Type, Cast Iron Body, 3/4 in', price: 730, fixed: false },
@@ -805,16 +755,70 @@ function renderQuotation(){const n=document.querySelector('#widget-quotation .wi
 n.querySelectorAll('[data-remove]').forEach(b=>b.onclick=()=>{state.quote.delete(Number(b.dataset.remove));renderQuotation();renderItems();});n.querySelectorAll('[data-qty]').forEach(i=>i.oninput=()=>{const id=Number(i.dataset.qty),r=state.quote.get(id);r.qty=Math.max(0,Number(i.value)||0);state.quote.set(id,r);renderQuotation();});n.querySelectorAll('[data-unit]').forEach(i=>i.oninput=()=>{const id=Number(i.dataset.unit),r=state.quote.get(id);r.unit=i.value||'pc';state.quote.set(id,r);});n.querySelector('#discount').oninput=(e)=>{state.discountPercent=Math.max(0,Number(e.target.value)||0);renderQuotation();};n.querySelector('[data-clear]').onclick=()=>{state.quote.clear();renderQuotation();renderItems();};n.querySelector('[data-copy-quote]').onclick=async()=>{const lines=['ITEM	QTY	UNIT	DESCRIPTION	UNIT COST	AMOUNT'];rows.forEach(r=>lines.push(`${r.idx}	${r.qty}	${r.unit}	${r.item.name}	${r.unitCost.toFixed(2)}	${r.amount.toFixed(2)}`));lines.push(`				SUBTOTAL	${subtotal.toFixed(2)}`);lines.push(`				DISCOUNT (${state.discountPercent}%)	${discountAmount.toFixed(2)}`);lines.push(`				GRAND TOTAL	${grand.toFixed(2)}`);await navigator.clipboard.writeText(lines.join('\n'));};}
 function renderConversion(){const n=document.querySelector('#widget-conversion .widget-body');n.innerHTML=`<label>Value <input id='conv-val' type='number' step='any' value='1'></label><label>Convert <select id='conv-type'><option value='mm_in'>mm to inches</option><option value='in_mm'>inches to mm</option><option value='cm_in'>cm to inches</option><option value='in_cm'>inches to cm</option><option value='m_ft'>meters to feet</option><option value='ft_m'>feet to meters</option></select></label><button id='conv-run'>Compute</button><div class='qa-result' id='conv-out'>Result: -</div><div class='small-note'>Approximate nominal pipe size only, verify specs.</div><table><tbody><tr><td>25mm</td><td>≈ 1 in</td></tr><tr><td>40mm</td><td>≈ 1-1/2 in</td></tr><tr><td>50mm</td><td>≈ 2 in</td></tr><tr><td>65mm</td><td>≈ 2-1/2 in</td></tr><tr><td>80mm</td><td>≈ 3 in</td></tr><tr><td>100mm</td><td>≈ 4 in</td></tr><tr><td>150mm</td><td>≈ 6 in</td></tr><tr><td>200mm</td><td>≈ 8 in</td></tr><tr><td>250mm</td><td>≈ 10 in</td></tr><tr><td>300mm</td><td>≈ 12 in</td></tr></tbody></table>`;n.querySelector('#conv-run').onclick=()=>{const v=Number(n.querySelector('#conv-val').value)||0,t=n.querySelector('#conv-type').value;const map={mm_in:v/25.4,in_mm:v*25.4,cm_in:v/2.54,in_cm:v*2.54,m_ft:v*3.28084,ft_m:v/3.28084};n.querySelector('#conv-out').textContent=`Result: ${map[t].toFixed(4)}`;};}
 function renderQA(){const n=document.querySelector('#widget-qa .widget-body');n.innerHTML=`<label>Manual FAQ search <input id='qa-input' placeholder='Type your question'/></label><button data-ask>Search Answer</button><div id='qa-result' class='qa-result'></div>`;const result=n.querySelector('#qa-result');n.querySelector('[data-ask]').onclick=()=>{const q=n.querySelector('#qa-input').value.trim().toLowerCase();const hit=manualQA.find(x=>q&&(x.q.toLowerCase().includes(q)||q.includes(x.q.toLowerCase().replace(/[?]/g,''))));if(hit)result.innerHTML=`<strong>Answer:</strong> ${hit.a}<br><em>Source: Manual Info</em>`;else result.innerHTML=`<strong>Answer:</strong> No direct manual match found. Verify before sending to client.<br><em>Source: Not verified / Needs checking</em>`;};}
+...items.slice(0,284),
 
-function normalizeQuery(text){return text.toLowerCase().replace(/[\"']/g,' ').replace(/[^a-z0-9\/\.\s-]/g,' ').replace(/\s+/g,' ').trim();}
-const inchToMmMap={0.5:'15',0.75:'20',1:'25',1.25:'32',1.5:'40',2:'50',2.5:'65',3:'80',4:'100',5:'125',6:'150',8:'200',10:'250',12:'300'};
-function parseClientLine(line){const raw=line.trim();if(!raw)return null;const m=raw.match(/^(\d+(?:\.\d+)?)\s+(.+)$/);return {qty:m?Number(m[1]):1,text:m?m[2].trim():raw,original:raw};}
-function extractSizeTokens(text){const out=[];const n=normalizeQuery(text);const inchRe=/(\d+(?:\/\d+)?(?:\.\d+)?)\s*(?:inches|inch|in|\")\b/g;let hit;while((hit=inchRe.exec(n))){let v=hit[1];if(v.includes('/')){const [a,b]=v.split('/');v=String(Number(a)/Number(b));}const num=Number(v);if(Number.isFinite(num)){const mm=(num*25.4).toFixed(0);out.push(mm+'mm');if(inchToMmMap[num])out.push(inchToMmMap[num]+'mm');}}const mmRe=/(\d+(?:\.\d+)?)\s*mm\b/g;while((hit=mmRe.exec(n))){out.push(Number(hit[1]).toFixed(0)+'mm');}return out;}
-function matchProducts(query){const sizeTokens=extractSizeTokens(query);const terms=[...new Set(normalizeQuery(query).split(' ').filter(t=>t&&t.length>1))];return normalizeItems.map(item=>{const hay=searchIndex(item);let score=0;terms.forEach(t=>{if(hay.includes(t))score+=3;});if(hay.includes(normalizeQuery(query)))score+=8;sizeTokens.forEach(t=>{if(hay.includes(t.replace('mm',' mm'))||hay.includes(t))score+=4;});if(/tee\s*reducer/.test(normalizeQuery(query))&&/tee/.test(hay)&&/reducer/.test(hay))score+=6;if(/pressure\s*gauge/.test(normalizeQuery(query))&&/pressure/.test(hay))score+=6;if(/brass\s*check/.test(normalizeQuery(query))&&/brass/.test(hay)&&/check/.test(hay))score+=7;return {item,score};}).filter(x=>x.score>0).sort((a,b)=>b.score-a.score).slice(0,5);}
-function computeRowFromMatch(base,best,choices){const m=Number(el.markup.value)||0;if(!best){return {...base,matches:choices,selectedId:'',unitPrice:null,amount:null,description:base.text,remarks:'No price found / Need supplier price'};}const unitPrice=markedPrice(best,m);const top=choices[0]?.score||0;const confident=top>=12||((choices[1]?.score||0)<=top*0.65);return {...base,matches:choices,selectedId:best.id,unitPrice,amount:base.qty*unitPrice,description:best.name,remarks:confident?'Matched':'Possible match'};}
-function renderAutoQuote(){const n=document.querySelector('#widget-autoQuote .widget-body');n.innerHTML=`<label>Paste client request<textarea id='aq-input' class='auto-quote-input' placeholder='2 2" Pressure Gauge\n1 3/4" brass Check Valve'></textarea></label><div class='auto-quote-actions'><button data-parse>Parse request</button><button data-copy>Copy quotation rows</button><button data-send>Send all matched items to Quotation</button></div><table class='auto-quote-table'><thead><tr><th>QTY</th><th>UNIT</th><th>ITEM DESCRIPTION</th><th>UNIT PRICE</th><th>AMOUNT</th><th>REMARKS</th><th>MATCHES</th></tr></thead><tbody id='aq-body'></tbody></table>`;const tbody=n.querySelector('#aq-body');const renderRows=()=>{tbody.innerHTML=state.autoQuoteRows.map((r,i)=>`<tr><td><input type='number' min='0' step='1' data-aq-qty='${i}' value='${r.qty}'></td><td><input data-aq-unit='${i}' value='${r.unit}'></td><td title='${r.original.replace(/'/g,"&#39;")}'><input data-aq-desc='${i}' value='${r.description}'></td><td class='money'>${r.unitPrice==null?'':toCurrency(r.unitPrice)}</td><td class='money'>${r.amount==null?'':toCurrency(r.amount)}</td><td>${r.remarks}</td><td><select data-aq-match='${i}'><option value=''>No match</option>${r.matches.map(m=>`<option value='${m.item.id}' ${m.item.id===r.selectedId?'selected':''}>${m.item.name}</option>`).join('')}</select></td></tr>`).join('');tbody.querySelectorAll('[data-aq-qty]').forEach(inp=>inp.oninput=()=>{const i=Number(inp.dataset.aqQty),v=Math.max(0,Number(inp.value)||0);state.autoQuoteRows[i].qty=v;state.autoQuoteRows[i].amount=state.autoQuoteRows[i].unitPrice==null?null:v*state.autoQuoteRows[i].unitPrice;renderRows();});tbody.querySelectorAll('[data-aq-unit]').forEach(inp=>inp.oninput=()=>{state.autoQuoteRows[Number(inp.dataset.aqUnit)].unit=inp.value||'pc';});tbody.querySelectorAll('[data-aq-desc]').forEach(inp=>inp.oninput=()=>{state.autoQuoteRows[Number(inp.dataset.aqDesc)].description=inp.value;});tbody.querySelectorAll('[data-aq-match]').forEach(sel=>sel.onchange=()=>{const i=Number(sel.dataset.aqMatch),id=Number(sel.value);const row=state.autoQuoteRows[i];const picked=row.matches.find(m=>m.item.id===id);const rebuilt=computeRowFromMatch({qty:row.qty,unit:row.unit,text:row.text,original:row.original},picked?.item,row.matches);state.autoQuoteRows[i]={...rebuilt,description:picked?picked.item.name:row.description};renderRows();});};n.querySelector('[data-parse]').onclick=()=>{const lines=n.querySelector('#aq-input').value.split('\n').map(parseClientLine).filter(Boolean);state.autoQuoteRows=lines.map(base=>{const matches=matchProducts(base.text);return computeRowFromMatch({...base,unit:'pc'},matches[0]?.item,matches);});renderRows();};n.querySelector('[data-copy]').onclick=async()=>{const lines=['QTY\tUNIT\tITEM DESCRIPTION\tUNIT PRICE\tAMOUNT\tREMARKS'];state.autoQuoteRows.forEach(r=>lines.push(`${r.qty}\t${r.unit}\t${r.description}\t${r.unitPrice==null?'':r.unitPrice.toFixed(2)}\t${r.amount==null?'':r.amount.toFixed(2)}\t${r.remarks}`));await navigator.clipboard.writeText(lines.join('\n'));};n.querySelector('[data-send]').onclick=()=>{state.autoQuoteRows.forEach(r=>{if(!r.selectedId||r.unitPrice==null)return;const ex=state.quote.get(r.selectedId);if(ex){ex.qty+=(Number(r.qty)||0);ex.unit=r.unit||ex.unit||'pc';state.quote.set(r.selectedId,ex);}else state.quote.set(r.selectedId,{itemId:r.selectedId,qty:Number(r.qty)||1,unit:r.unit||'pc'});});openWidget('quotation');renderQuotation();renderItems();};renderRows();}
+// ===== MERGED PART START =====
+{ id: 285, name: 'PE Tee 3 in', price: 2928.20, fixed: false },
+{ id: 286, name: 'PE Tee 2 in', price: 667.70, fixed: false },
+{ id: 287, name: 'PE Tee 1 in', price: 145.20, fixed: false },
+{ id: 288, name: 'PE Tee 1/2 in', price: 79.20, fixed: false },
+{ id: 289, name: 'PE Tee Reducer 3 in x 2 in', price: 1664.30, fixed: false },
+{ id: 290, name: 'PE Tee Reducer 2 in x 1 in', price: 733.70, fixed: false },
+{ id: 291, name: 'PE Tee Reducer 1 in x 1/2 in', price: 133.10, fixed: false },
+{ id: 292, name: 'PE Elbow 3 in', price: 2123, fixed: false },
+{ id: 293, name: 'PE Elbow 2 in', price: 466.40, fixed: false },
+{ id: 294, name: 'PE Elbow 1 in', price: 115.50, fixed: false },
+{ id: 295, name: 'PE Elbow 1/2 in', price: 56.10, fixed: false },
+{ id: 296, name: 'PE Coupling 3 in', price: 1472.90, fixed: false },
+{ id: 297, name: 'PE Coupling 2 in', price: 454.30, fixed: false },
+{ id: 298, name: 'PE Coupling 1 in', price: 88, fixed: false },
+{ id: 299, name: 'PE Coupling 1/2 in', price: 58.30, fixed: false },
+{ id: 300, name: 'PE Reducer 3 in x 2 in', price: 1394.80, fixed: false },
+{ id: 301, name: 'PE Reducer 2 in x 1 in', price: 303.60, fixed: false },
+{ id: 302, name: 'PE Reducer 1 in x 1/2 in', price: 100.10, fixed: false },
+{ id: 303, name: 'PE Male Threaded Adapter 3 in', price: 1048.30, fixed: false },
+{ id: 304, name: 'PE Male Threaded Adapter 2 in', price: 256.30, fixed: false },
+{ id: 305, name: 'PE Male Threaded Adapter 1 in', price: 61.60, fixed: false },
+{ id: 306, name: 'PE Male Threaded Adapter 1/2 in', price: 31.90, fixed: false },
+{ id: 307, name: 'PE Female Threaded Adapter 3 in', price: 1449.80, fixed: false },
+{ id: 308, name: 'PE Female Threaded Adapter 2 in', price: 360.80, fixed: false },
+{ id: 309, name: 'PE Female Threaded Adapter 1 in', price: 71.50, fixed: false },
+{ id: 310, name: 'PE Female Threaded Adapter 1/2 in', price: 30.80, fixed: false },
+{ id: 311, name: 'HDPE Pipe SDR11 90mm x 60m', price: 19260, fixed: false },
+{ id: 312, name: 'Brass Pressure Relief Valve 1/2 in', price: 950, fixed: false },
+{ id: 313, name: 'DI Y Strainer 3 in', price: 8623, fixed: false },
+{ id: 314, name: 'Flexible Connector Single Sphere 3 in', price: 2800, fixed: false },
+{ id: 315, name: 'DI Check Valve 3 in', price: 5700, fixed: false },
+{ id: 316, name: 'Flange ANSI 150 3 in', price: 3100, fixed: false },
+{ id: 317, name: 'Water Flowmeter Herotech 3 in Flange End', price: 13600, fixed: false },
+{ id: 318, name: 'Steel Ring Flange Set 3 in', price: 1206, fixed: false },
+{ id: 319, name: 'Butterfly Valve 4 in Gear Operated', price: 4800, fixed: false },
+{ id: 320, name: 'Flange Tee Reducer 4 in x 2 in', price: 4500, fixed: false },
+{ id: 321, name: 'Ring On Flange 2 in', price: 1200, fixed: false },
+{ id: 322, name: 'GI Union Patente 2 in', price: 400, fixed: false },
+{ id: 323, name: 'HDPE Elbow SDR17 225mm', price: 6040, fixed: false },
+{ id: 324, name: 'HDPE Stub End SDR17 225mm', price: 3450, fixed: false },
+{ id: 325, name: 'Ring On Flange with BNG 225mm', price: 4500, fixed: false },
+{ id: 326, name: 'Blind Flange 8 in', price: 4000, fixed: false },
+{ id: 327, name: 'Manhole Cover 24 in', price: 17000, fixed: false },
+{ id: 328, name: 'uPVC Tee Reducer 6 in x 2 in Solvent Type', price: 4830, fixed: false },
+{ id: 329, name: 'uPVC Tee Reducer 6 in x 2 in Rubber Ring', price: 4390.80, fixed: false },
 
-el.search.addEventListener('input',renderItems);el.markup.addEventListener('input',()=>{renderItems();if(document.querySelector('#widget-quotation:not([hidden])'))renderQuotation();});renderDock();renderCategories();renderItems();
-</script>
-  </body>
-</html>
+// ===== SECOND BLOCK =====
+{ id: 330, name: 'FS Brass Ball Valve Lockwing 1/2 in', price: 250, fixed: false },
+{ id: 331, name: 'FS Brass Ball Valve Lockwing 3/4 in', price: 488, fixed: false },
+{ id: 332, name: 'FS Brass Ball Valve Lockwing 1 in', price: 583, fixed: false },
+{ id: 333, name: 'FS Brass Ball Valve Lockwing 2 in', price: 4400, fixed: false },
+{ id: 334, name: 'FS Brass Angle Ball Valve 1/2 x 3/4 in', price: 515, fixed: false },
+{ id: 335, name: 'FS Brass Angle Ball Valve 3/4 x 3/4 in', price: 610, fixed: false },
+{ id: 336, name: 'FS Brass Stop Valve 1/2 in', price: 166, fixed: false },
+{ id: 337, name: 'FS Brass Stop Valve 3/4 in', price: 229, fixed: false },
+{ id: 338, name: 'FS Brass Gate Valve 1 in', price: 491, fixed: false },
+{ id: 339, name: 'FS Brass Gate Valve 2 in', price: 2015, fixed: false },
+{ id: 340, name: 'Wet Alarm Check Valve 3 in', price: 45000, fixed: false },
+{ id: 341, name: 'Wet Alarm Check Valve 4 in', price: 56000, fixed: false },
+{ id: 342, name: 'Wet Alarm Check Valve 6 in', price: 65000, fixed: false },
+{ id: 343, name: 'Wet Alarm Check Valve 8 in', price: 80000, fixed: false }
+
+// ===== END =====
+];
