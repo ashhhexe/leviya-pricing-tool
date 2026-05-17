@@ -1,4 +1,760 @@
 const items = [
+{ id: 1, name: 'Water Meter, Horizontal Type, Cast Iron Body, 1/2 in', price: 630, fixed: false },
+{ id: 2, name: 'Water Meter, Horizontal Type, Cast Iron Body, 3/4 in', price: 730, fixed: false },
+{ id: 3, name: 'Water Meter, Horizontal Type, Cast Iron Body, 1 in', price: 1140, fixed: false },
+{ id: 4, name: 'Water Meter, Horizontal Type, Cast Iron Body, 1-1/4 in', price: 2100, fixed: false },
+{ id: 5, name: 'Water Meter, Horizontal Type, Cast Iron Body, 1-1/2 in', price: 2600, fixed: false },
+{ id: 6, name: 'Water Meter, Horizontal Type, Cast Iron Body, 2 in', price: 4285, fixed: false },
+{ id: 7, name: 'Water Meter, Horizontal Type, Brass Body, 1/2 in', price: 1400, fixed: false },
+{ id: 8, name: 'Water Meter, Horizontal Type, Brass Body, 3/4 in', price: 1700, fixed: false },
+{ id: 9, name: 'Water Meter, Horizontal Type, Brass Body, 1 in', price: 2800, fixed: false },
+{ id: 10, name: 'Water Meter, Vertical Type, Cast Iron Body, 1/2 in', price: 700, fixed: false },
+{ id: 11, name: 'Water Meter, Vertical Type, Cast Iron Body, 3/4 in', price: 850, fixed: false },
+{ id: 12, name: 'Water Meter, Vertical Type, Cast Iron Body, 1 in', price: 1285, fixed: false },
+{ id: 13, name: 'Water Meter, Vertical Type, Cast Iron Body, 1-1/4 in', price: 3200, fixed: false },
+{ id: 14, name: 'Water Meter, Vertical Type, Cast Iron Body, 1-1/2 in', price: 5200, fixed: false },
+{ id: 15, name: 'Water Meter, Vertical Type, Cast Iron Body, Female Thread, 2 in', price: 4800, fixed: false },
+{ id: 16, name: 'Water Meter, Ecotech, Cast Iron Body, 1/2 in', price: 700, fixed: false },
+{ id: 17, name: 'Water Meter, Ecotech, Brass Body, 1/2 in', price: 1000, fixed: false },
+{ id: 18, name: 'Water Flow Meter, Flanged Type, 2 in', price: 11800, fixed: false },
+{ id: 19, name: 'Water Flow Meter, Flanged Type, 2-1/2 in', price: 12150, fixed: false },
+{ id: 20, name: 'Water Flow Meter, Flanged Type, 3 in', price: 13600, fixed: false },
+{ id: 21, name: 'Water Flow Meter, Flanged Type, 4 in', price: 15000, fixed: false },
+{ id: 22, name: 'Water Flow Meter, Flanged Type, 5 in', price: 18000, fixed: false },
+{ id: 23, name: 'Water Flow Meter, Flanged Type, 6 in', price: 18500, fixed: false },
+{ id: 24, name: 'Water Flow Meter, Flanged Type, 8 in', price: 22850, fixed: false },
+{ id: 25, name: 'Water Flow Meter, Flanged Type, 10 in', price: 64300, fixed: false },
+{ id: 26, name: 'Water Flow Meter, Flanged Type, 12 in', price: 71500, fixed: false },
+{ id: 27, name: 'Turbine Flow Meter, 4 in', price: 95000, fixed: false },
+{ id: 28, name: 'Aquajet Flow Meter, 2 in', price: 12350, fixed: false },
+{ id: 29, name: 'HDPE Pipe, SDR11, 20 mm x 100 m', price: 1633, fixed: false },
+{ id: 30, name: 'HDPE Pipe, SDR11, 20 mm x 300 m', price: 4899, fixed: false },
+{ id: 31, name: 'HDPE Pipe, SDR11, 32 mm x 100 m', price: 4200, fixed: false },
+{ id: 32, name: 'HDPE Pipe, SDR11, 50 mm x 60 m', price: 6192, fixed: false },
+{ id: 33, name: 'HDPE Pipe, SDR11, 75 mm x 60 m', price: 13512, fixed: false },
+{ id: 34, name: 'HDPE Pipe, SDR11, 100 mm x 6 m', price: 2870, fixed: false },
+{ id: 35, name: 'HDPE Pipe, SDR17, 225 mm x 6 m', price: 8304.84, fixed: true },
+{ id: 36, name: 'uPVC Pipe, Class 100, 2 in', price: 675, fixed: false },
+{ id: 37, name: 'uPVC Pipe, Class 100, 4 in', price: 2024, fixed: false },
+{ id: 38, name: 'uPVC Pipe, Class 100, 6 in', price: 4305, fixed: false },
+{ id: 39, name: 'uPVC Pipe, Class 150, 4 in', price: 2435, fixed: false },
+{ id: 40, name: 'uPVC Pipe, Class 150, 6 in', price: 4945, fixed: false },
+{ id: 41, name: 'uPVC Pipe, Class 150, 12 in', price: 36288, fixed: false },
+{ id: 42, name: 'uPVC Elbow, RR Type, 12 in x 90 Degree', price: 40975.2, fixed: false },
+{ id: 43, name: 'uPVC Elbow, RR Type, 12 in x 45 Degree', price: 32781.6, fixed: false },
+{ id: 44, name: 'uPVC Tee, RR Type, 12 in', price: 11671.2, fixed: false },
+{ id: 45, name: 'uPVC Flange, 12 in', price: 4838.4, fixed: false },
+{ id: 46, name: 'BI Pipe, SCH40, 25 mm', price: 770, fixed: false },
+{ id: 47, name: 'BI Pipe, SCH40, 40 mm', price: 1260, fixed: false },
+{ id: 48, name: 'BI Pipe, SCH40, 50 mm', price: 1630, fixed: false },
+{ id: 49, name: 'BI Pipe, SCH40, 80 mm', price: 3460, fixed: false },
+{ id: 50, name: 'BI Pipe, SCH40, 100 mm', price: 5290, fixed: false },
+{ id: 51, name: 'BI Elbow, Welded Type, 100 mm', price: 249, fixed: false },
+{ id: 52, name: 'BI Tee, Reducer Type, 100 mm x 50 mm', price: 450, fixed: false },
+{ id: 53, name: 'Concentric Reducer, Welded Type, 100 mm x 80 mm', price: 324, fixed: false },
+{ id: 54, name: 'BI Street Elbow, 100 mm x 90 Degree', price: 1155, fixed: false },
+{ id: 55, name: 'CI Check Valve, 100 mm', price: 4870, fixed: false },
+{ id: 56, name: 'Brass Check Valve, 50 mm', price: 1397, fixed: false },
+{ id: 57, name: 'OS&Y Gate Valve, 100 mm', price: 6515, fixed: false },
+{ id: 58, name: 'Pressure Relief Valve, 100 mm', price: 20000, fixed: false },
+{ id: 59, name: 'Air Release Valve, F/F, 2 in', price: 5790, fixed: false },
+{ id: 60, name: 'Siamese Twin, 100 mm x 65 mm x 65 mm', price: 4800, fixed: false },
+{ id: 61, name: 'CI Fire Hydrant Head, 3 in x 2-1/2 in', price: 8600, fixed: false },
+{ id: 62, name: 'CI Fire Hydrant Head, 4 in x 2-1/2 in', price: 9620, fixed: false },
+{ id: 63, name: 'Mech Groove Elbow, 45 Degree, 2 in', price: 211.4, fixed: true },
+{ id: 64, name: 'Mech Groove Elbow, 90 Degree, 4 in', price: 814.8, fixed: true },
+{ id: 65, name: 'Mech Groove Coupling, 4 in', price: 630, fixed: true },
+{ id: 66, name: 'Mech Groove Tee, 4 in', price: 1243.2, fixed: true },
+{ id: 67, name: 'Mech Flange Adapter, 4 in', price: 999.6, fixed: true },
+{ id: 68, name: 'BI Elbow, Threaded Type, 50 mm', price: 107, fixed: false },
+{ id: 69, name: 'BI Elbow, Threaded Type, 40 mm', price: 88.5, fixed: false },
+{ id: 70, name: 'BI Elbow, Threaded Type, 25 mm', price: 44.25, fixed: false },
+{ id: 71, name: 'BI Tee, Welded Type, 100 mm', price: 450, fixed: false },
+{ id: 72, name: 'BI Tee, Welded Type, 100 mm x 50 mm', price: 450, fixed: false },
+{ id: 73, name: 'BI Tee, Threaded Type, 50 mm', price: 174, fixed: false },
+{ id: 74, name: 'BI Tee, Threaded Type, 25 mm', price: 58, fixed: false },
+{ id: 75, name: 'BI Tee, Reducer Type, 100 mm x 40 mm', price: 450, fixed: false },
+{ id: 76, name: 'BI Tee, Reducer Type, 80 mm x 50 mm', price: 365, fixed: false },
+{ id: 77, name: 'BI Tee, Reducer Type, 80 mm x 40 mm', price: 365, fixed: false },
+{ id: 78, name: 'BI Tee, Reducer Type, 50 mm x 25 mm', price: 208, fixed: false },
+{ id: 79, name: 'Concentric Reducer, Welded Type, 80 mm x 50 mm', price: 272, fixed: false },
+{ id: 80, name: 'Concentric Reducer, Welded Type, 50 mm x 40 mm', price: 144, fixed: false },
+{ id: 81, name: 'Concentric Reducer, Welded Type, 50 mm x 25 mm', price: 144, fixed: false },
+{ id: 82, name: 'Concentric Reducer, Welded Type, 40 mm x 25 mm', price: 112, fixed: false },
+{ id: 83, name: 'Concentric Reducer, Welded Type, 25 mm x 12 mm', price: 96, fixed: false },
+{ id: 84, name: 'Flange, 100 mm', price: 320, fixed: false },
+{ id: 85, name: 'Flange, 50 mm', price: 170, fixed: false },
+{ id: 86, name: 'Gate Valve, Threaded Type, 50 mm', price: 870, fixed: false },
+{ id: 87, name: 'Rubber Flexible Connector, 100 mm', price: 1836, fixed: false },
+{ id: 88, name: 'Rubber Flexible Connector, 50 mm', price: 1305, fixed: false },
+{ id: 89, name: 'Union, 50 mm', price: 367.5, fixed: false },
+{ id: 90, name: 'Pressure Relief Valve, 50 mm', price: 6132, fixed: false },
+{ id: 91, name: 'Waste Connection, 4 in x 3 in', price: 12000, fixed: false },
+{ id: 92, name: 'GI Cap, Threaded Type, 2 in', price: 87, fixed: false },
+{ id: 93, name: 'BI Pipe, Seamless SCH40, 6 in', price: 8955, fixed: false },
+{ id: 94, name: 'BI Pipe, Seamless SCH40, 4 in', price: 5332, fixed: false },
+{ id: 95, name: 'GI Pipe, Threaded SCH40, 2 in', price: 3440, fixed: false },
+{ id: 96, name: 'Connector Reducer, Eccentric SCH40, 6 in x 4 in', price: 1500, fixed: false },
+{ id: 97, name: 'BI Elbow, 90 Degree SCH40, 4 in', price: 350, fixed: false },
+{ id: 98, name: 'BI Elbow, 90 Degree SCH40, 6 in', price: 970, fixed: false },
+{ id: 99, name: 'BI Slip-On Flange, 4 in', price: 600, fixed: false },
+{ id: 100, name: 'GI Tee Reducer, Welded Type, 6 in x 4 in', price: 1150, fixed: false },
+{ id: 101, name: 'SCH80 BI Wye Equal, 4 in Buttweld', price: 1500, fixed: false },
+{ id: 102, name: 'SCH80 BI Elbow, 90 Degree, 4 in Buttweld', price: 350, fixed: false },
+{ id: 103, name: 'SCH80 BI Concentric Reducer, 4 in x 2-1/2 in', price: 600, fixed: false },
+{ id: 104, name: 'BI Slip-On Raised Face Flange, 3 in ANSI 150 lbs', price: 270, fixed: false },
+{ id: 105, name: 'Flexible Rubber Connector, 3 in ANSI Class 150', price: 1464, fixed: false },
+{ id: 106, name: 'PPR Pipe PN20 SDR6 20mm x 4m', price: 270, fixed: false },
+{ id: 107, name: 'PPR Pipe PN20 SDR6 25mm x 4m', price: 425, fixed: false },
+{ id: 108, name: 'PPR Pipe PN20 SDR6 32mm x 4m', price: 690, fixed: false },
+{ id: 109, name: 'PPR Pipe PN20 SDR6 40mm x 4m', price: 1030, fixed: false },
+{ id: 110, name: 'PPR Pipe PN20 SDR6 50mm x 4m', price: 1630, fixed: false },
+{ id: 111, name: 'PPR Pipe PN20 SDR6 63mm x 4m', price: 2550, fixed: false },
+{ id: 112, name: 'PPR Coupling 20mm', price: 5.70, fixed: false },
+{ id: 113, name: 'PPR Coupling 25mm', price: 9, fixed: false },
+{ id: 114, name: 'PPR Coupling 32mm', price: 16, fixed: false },
+{ id: 115, name: 'PPR Coupling 40mm', price: 28.50, fixed: false },
+{ id: 116, name: 'PPR Coupling 50mm', price: 45, fixed: false },
+{ id: 117, name: 'PPR Coupling 63mm', price: 80, fixed: false },
+{ id: 118, name: 'PPR Elbow 90 Degree 20mm', price: 9, fixed: false },
+{ id: 119, name: 'PPR Elbow 90 Degree 25mm', price: 14.30, fixed: false },
+{ id: 120, name: 'PPR Elbow 90 Degree 32mm', price: 27, fixed: false },
+{ id: 121, name: 'PPR Elbow 90 Degree 40mm', price: 49, fixed: false },
+{ id: 122, name: 'PPR Elbow 90 Degree 50mm', price: 85, fixed: false },
+{ id: 123, name: 'PPR Elbow 90 Degree 63mm', price: 148, fixed: false },
+{ id: 124, name: 'PPR Elbow 45 Degree 20mm', price: 9, fixed: false },
+{ id: 125, name: 'PPR Elbow 45 Degree 25mm', price: 14, fixed: false },
+{ id: 126, name: 'PPR Elbow 45 Degree 32mm', price: 25, fixed: false },
+{ id: 127, name: 'PPR Elbow 45 Degree 40mm', price: 44, fixed: false },
+{ id: 128, name: 'PPR Elbow 45 Degree 50mm', price: 72, fixed: false },
+{ id: 129, name: 'PPR Elbow 45 Degree 63mm', price: 130, fixed: false },
+{ id: 130, name: 'PPR Tee Equal 20mm', price: 11.50, fixed: false },
+{ id: 131, name: 'PPR Tee Equal 25mm', price: 18.50, fixed: false },
+{ id: 132, name: 'PPR Tee Equal 32mm', price: 34, fixed: false },
+{ id: 133, name: 'PPR Tee Equal 40mm', price: 62, fixed: false },
+{ id: 134, name: 'PPR Tee Equal 50mm', price: 100, fixed: false },
+{ id: 135, name: 'PPR Tee Equal 63mm', price: 185, fixed: false },
+{ id: 136, name: 'PPR Male Adapter 20mm x 1/2 in', price: 77, fixed: false },
+{ id: 137, name: 'PPR Male Adapter 25mm x 3/4 in', price: 96, fixed: false },
+{ id: 138, name: 'PPR Male Adapter 32mm x 1 in', price: 285, fixed: false },
+{ id: 139, name: 'PPR Male Adapter 40mm x 1-1/4 in', price: 410, fixed: false },
+{ id: 140, name: 'PPR Male Adapter 50mm x 1-1/2 in', price: 530, fixed: false },
+{ id: 141, name: 'PPR Male Adapter 63mm x 2 in', price: 910, fixed: false },
+{ id: 142, name: 'PPR Female Adapter 20mm x 1/2 in', price: 72, fixed: false },
+{ id: 143, name: 'PPR Female Adapter 25mm x 3/4 in', price: 92, fixed: false },
+{ id: 144, name: 'PPR Female Adapter 32mm x 1 in', price: 210, fixed: false },
+{ id: 145, name: 'PPR Female Adapter 40mm x 1-1/4 in', price: 350, fixed: false },
+{ id: 146, name: 'PPR Female Adapter 50mm x 1-1/2 in', price: 470, fixed: false },
+{ id: 147, name: 'PPR Female Adapter 63mm x 2 in', price: 670, fixed: false },
+{ id: 148, name: 'PPR Union 20mm', price: 27, fixed: false },
+{ id: 149, name: 'PPR Union 25mm', price: 44.50, fixed: false },
+{ id: 150, name: 'PPR Union 32mm', price: 72, fixed: false },
+{ id: 151, name: 'PPR Union 40mm', price: 128, fixed: false },
+{ id: 152, name: 'PPR Union 50mm', price: 215, fixed: false },
+{ id: 153, name: 'PPR Union 63mm', price: 375, fixed: false },
+{ id: 154, name: 'PPR Stop Valve 20mm', price: 345, fixed: false },
+{ id: 155, name: 'PPR Stop Valve 25mm', price: 510, fixed: false },
+{ id: 156, name: 'PPR Stop Valve 32mm', price: 520, fixed: false },
+{ id: 157, name: 'PPR Stop Valve 40mm', price: 790, fixed: false },
+{ id: 158, name: 'PPR Stop Valve 50mm', price: 1250, fixed: false },
+{ id: 159, name: 'PPR Stop Valve 63mm', price: 1600, fixed: false },
+{ id: 160, name: 'PPR Stop Valve Threaded Both Ends 20mm', price: 460, fixed: false },
+{ id: 161, name: 'PPR Stop Valve Threaded Both Ends 25mm', price: 680, fixed: false },
+{ id: 162, name: 'PPR Stop Valve Threaded Both Ends 32mm', price: 910, fixed: false },
+{ id: 163, name: 'PPR Stop Valve Threaded Both Ends 40mm', price: 1350, fixed: false },
+{ id: 164, name: 'PPR Stop Valve Threaded Both Ends 50mm', price: 1950, fixed: false },
+{ id: 165, name: 'PPR Stop Valve Threaded Both Ends 63mm', price: 2650, fixed: false },
+{ id: 166, name: 'HDPE Butt Fusion Reducer SDR11 90mm x 63mm', price: 397.50, fixed: false },
+{ id: 167, name: 'HDPE Butt Fusion Reducer SDR17 90mm x 63mm', price: 350, fixed: false },
+{ id: 168, name: 'HDPE Butt Fusion Reducer SDR11 110mm x 63mm', price: 575, fixed: false },
+{ id: 169, name: 'HDPE Butt Fusion Reducer SDR17 110mm x 63mm', price: 507.50, fixed: false },
+{ id: 170, name: 'HDPE Butt Fusion Reducer SDR11 160mm x 110mm', price: 1425, fixed: false },
+{ id: 171, name: 'HDPE Butt Fusion Reducer SDR17 160mm x 110mm', price: 1277.50, fixed: false },
+{ id: 172, name: 'HDPE Butt Fusion Reducer SDR11 225mm x 160mm', price: 3200, fixed: false },
+{ id: 173, name: 'HDPE Butt Fusion Reducer SDR17 225mm x 160mm', price: 2870, fixed: false },
+{ id: 174, name: 'HDPE Butt Fusion End Cap SDR11 63mm', price: 175, fixed: false },
+{ id: 175, name: 'HDPE Butt Fusion End Cap SDR17 63mm', price: 150, fixed: false },
+{ id: 176, name: 'HDPE Butt Fusion End Cap SDR11 110mm', price: 725, fixed: false },
+{ id: 177, name: 'HDPE Butt Fusion End Cap SDR17 110mm', price: 615, fixed: false },
+{ id: 178, name: 'HDPE Butt Fusion End Cap SDR11 225mm', price: 3717.50, fixed: false },
+{ id: 179, name: 'HDPE Butt Fusion End Cap SDR17 225mm', price: 3337.50, fixed: false },
+{ id: 180, name: 'HDPE Flange Adaptor SDR11 63mm', price: 205, fixed: false },
+{ id: 181, name: 'HDPE Flange Adaptor SDR17 63mm', price: 182.50, fixed: false },
+{ id: 182, name: 'HDPE Flange Adaptor SDR11 110mm', price: 690, fixed: false },
+{ id: 183, name: 'HDPE Flange Adaptor SDR17 110mm', price: 617.50, fixed: false },
+{ id: 184, name: 'HDPE Flange Adaptor SDR11 225mm', price: 3845, fixed: false },
+{ id: 185, name: 'HDPE Flange Adaptor SDR17 225mm', price: 3450, fixed: false },
+{ id: 186, name: 'Mechanical Gate Valve 2 in', price: 4900, fixed: false },
+{ id: 187, name: 'Mechanical Gate Valve 3 in', price: 7200, fixed: false },
+{ id: 188, name: 'Mechanical Gate Valve 4 in', price: 8800, fixed: false },
+{ id: 189, name: 'Mechanical Gate Valve 6 in', price: 14800, fixed: false },
+{ id: 190, name: 'NRS Gate Valve Flange 2 in', price: 3600, fixed: false },
+{ id: 191, name: 'NRS Gate Valve Flange 3 in', price: 5800, fixed: false },
+{ id: 192, name: 'NRS Gate Valve Flange 4 in', price: 7600, fixed: false },
+{ id: 193, name: 'NRS Gate Valve Flange 6 in', price: 12800, fixed: false },
+{ id: 194, name: 'Globe Valve Flange 2 in', price: 4200, fixed: false },
+{ id: 195, name: 'Globe Valve Flange 3 in', price: 6500, fixed: false },
+{ id: 196, name: 'Globe Valve Flange 4 in', price: 9500, fixed: false },
+{ id: 197, name: 'Swing Check Valve Flange 2 in', price: 4500, fixed: false },
+{ id: 198, name: 'Swing Check Valve Flange 3 in', price: 6800, fixed: false },
+{ id: 199, name: 'Swing Check Valve Flange 4 in', price: 8800, fixed: false },
+{ id: 200, name: 'Swing Check Valve Flange 6 in', price: 16000, fixed: false },
+{ id: 201, name: 'STC Mechanical Coupling 2 in', price: 1150, fixed: false },
+{ id: 202, name: 'STC Mechanical Coupling 3 in', price: 1500, fixed: false },
+{ id: 203, name: 'STC Mechanical Coupling 4 in', price: 2000, fixed: false },
+{ id: 204, name: 'STC Mechanical Coupling 6 in', price: 2990, fixed: false },
+{ id: 205, name: 'Long STC Coupling 2 in', price: 2650, fixed: false },
+{ id: 206, name: 'Long STC Coupling 3 in', price: 2850, fixed: false },
+{ id: 207, name: 'Long STC Coupling 4 in', price: 3500, fixed: false },
+{ id: 208, name: 'Long STC Coupling 6 in', price: 5000, fixed: false },
+{ id: 209, name: 'HDPE Butt Fusion Reducer SDR11 90mm x 75mm', price: 425, fixed: false },
+{ id: 210, name: 'HDPE Butt Fusion Reducer SDR17 90mm x 75mm', price: 375, fixed: false },
+{ id: 211, name: 'HDPE Butt Fusion Reducer SDR11 110mm x 75mm', price: 617.50, fixed: false },
+{ id: 212, name: 'HDPE Butt Fusion Reducer SDR17 110mm x 75mm', price: 545, fixed: false },
+{ id: 213, name: 'HDPE Butt Fusion Reducer SDR11 110mm x 90mm', price: 670, fixed: false },
+{ id: 214, name: 'HDPE Butt Fusion Reducer SDR17 110mm x 90mm', price: 590, fixed: false },
+{ id: 215, name: 'HDPE Butt Fusion Reducer SDR11 160mm x 90mm', price: 1307.50, fixed: false },
+{ id: 216, name: 'HDPE Butt Fusion Reducer SDR17 160mm x 90mm', price: 1172.50, fixed: false },
+{ id: 217, name: 'HDPE Butt Fusion Reducer SDR11 225mm x 90mm', price: 3067.50, fixed: false },
+{ id: 218, name: 'HDPE Butt Fusion Reducer SDR17 225mm x 90mm', price: 2752.50, fixed: false },
+{ id: 219, name: 'HDPE Butt Fusion Reducer SDR11 225mm x 110mm', price: 3162.50, fixed: false },
+{ id: 220, name: 'HDPE Butt Fusion Reducer SDR17 225mm x 110mm', price: 2837.50, fixed: false },
+{ id: 221, name: 'HDPE Butt Fusion Reducer SDR11 280mm x 160mm', price: 5447.50, fixed: false },
+{ id: 222, name: 'HDPE Butt Fusion Reducer SDR17 280mm x 160mm', price: 4887.50, fixed: false },
+{ id: 223, name: 'HDPE Butt Fusion Reducer SDR11 280mm x 225mm', price: 5472.50, fixed: false },
+{ id: 224, name: 'HDPE Butt Fusion Reducer SDR17 280mm x 225mm', price: 4912.50, fixed: false },
+{ id: 225, name: 'HDPE Butt Fusion End Cap SDR11 75mm', price: 365, fixed: false },
+{ id: 226, name: 'HDPE Butt Fusion End Cap SDR17 75mm', price: 310, fixed: false },
+{ id: 227, name: 'HDPE Butt Fusion End Cap SDR11 90mm', price: 492.50, fixed: false },
+{ id: 228, name: 'HDPE Butt Fusion End Cap SDR17 90mm', price: 442.50, fixed: false },
+{ id: 229, name: 'HDPE Butt Fusion End Cap SDR11 160mm', price: 1867.50, fixed: false },
+{ id: 230, name: 'HDPE Butt Fusion End Cap SDR17 160mm', price: 1675, fixed: false },
+{ id: 231, name: 'HDPE Butt Fusion End Cap SDR11 315mm', price: 7290, fixed: false },
+{ id: 232, name: 'HDPE Butt Fusion End Cap SDR17 315mm', price: 6545, fixed: false },
+{ id: 233, name: 'HDPE Flange Adaptor SDR11 75mm', price: 347.50, fixed: false },
+{ id: 234, name: 'HDPE Flange Adaptor SDR17 75mm', price: 310, fixed: false },
+{ id: 235, name: 'HDPE Flange Adaptor SDR11 90mm', price: 457.50, fixed: false },
+{ id: 236, name: 'HDPE Flange Adaptor SDR17 90mm', price: 410, fixed: false },
+{ id: 237, name: 'HDPE Flange Adaptor SDR11 160mm', price: 1740, fixed: false },
+{ id: 238, name: 'HDPE Flange Adaptor SDR17 160mm', price: 1560, fixed: false },
+{ id: 239, name: 'HDPE Flange Adaptor SDR11 280mm', price: 4585, fixed: false },
+{ id: 240, name: 'HDPE Flange Adaptor SDR17 280mm', price: 4037.50, fixed: false },
+{ id: 241, name: 'HDPE Flange Adaptor SDR11 315mm', price: 6872.50, fixed: false },
+{ id: 242, name: 'HDPE Flange Adaptor SDR17 315mm', price: 6170, fixed: false },
+{ id: 243, name: 'Mechanical Gate Valve 8 in', price: 22000, fixed: false },
+{ id: 244, name: 'Mechanical Gate Valve 10 in', price: 40000, fixed: false },
+{ id: 245, name: 'Mechanical Gate Valve 12 in', price: 51000, fixed: false },
+{ id: 246, name: 'NRS Gate Valve Flange 8 in', price: 18000, fixed: false },
+{ id: 247, name: 'NRS Gate Valve Flange 10 in', price: 32000, fixed: false },
+{ id: 248, name: 'NRS Gate Valve Flange 12 in', price: 46500, fixed: false },
+{ id: 249, name: 'Globe Valve Flange 6 in', price: 14000, fixed: false },
+{ id: 250, name: 'Globe Valve Flange 8 in', price: 17000, fixed: false },
+{ id: 251, name: 'Swing Check Valve Flange 8 in', price: 26000, fixed: false },
+{ id: 252, name: 'Swing Check Valve Flange 10 in', price: 42500, fixed: false },
+{ id: 253, name: 'Swing Check Valve Flange 12 in', price: 55000, fixed: false },
+{ id: 254, name: 'Swing Check Valve With Counter Weight 2 in', price: 5500, fixed: false },
+{ id: 255, name: 'Swing Check Valve With Counter Weight 2-1/2 in', price: 6400, fixed: false },
+{ id: 256, name: 'Swing Check Valve With Counter Weight 3 in', price: 8200, fixed: false },
+{ id: 257, name: 'Swing Check Valve With Counter Weight 4 in', price: 10800, fixed: false },
+{ id: 258, name: 'Swing Check Valve With Counter Weight 6 in', price: 19000, fixed: false },
+{ id: 259, name: 'Swing Check Valve With Counter Weight 8 in', price: 31000, fixed: false },
+{ id: 260, name: 'Swing Check Valve With Counter Weight 10 in', price: 50000, fixed: false },
+{ id: 261, name: 'Swing Check Valve With Counter Weight 12 in', price: 65000, fixed: false },
+{ id: 262, name: 'Universal PVC Flange Adapter 2 in', price: 1100, fixed: false },
+{ id: 263, name: 'Universal PVC Flange Adapter 2-1/2 in', price: 1200, fixed: false },
+{ id: 264, name: 'Universal PVC Flange Adapter 3 in', price: 1250, fixed: false },
+{ id: 265, name: 'Universal PVC Flange Adapter 4 in', price: 1500, fixed: false },
+{ id: 266, name: 'Universal PVC Flange Adapter 6 in', price: 2200, fixed: false },
+{ id: 267, name: 'Universal PVC Flange Adapter 8 in', price: 2700, fixed: false },
+{ id: 268, name: 'Universal PVC Flange Adapter 10 in', price: 4300, fixed: false },
+{ id: 269, name: 'Universal PVC Flange Adapter 12 in', price: 5000, fixed: false },
+{ id: 270, name: 'PVC Restrained Flange Adapter 2 in', price: 2200, fixed: false },
+{ id: 271, name: 'PVC Restrained Flange Adapter 2-1/2 in', price: 2400, fixed: false },
+{ id: 272, name: 'PVC Restrained Flange Adapter 3 in', price: 2450, fixed: false },
+{ id: 273, name: 'PVC Restrained Flange Adapter 4 in', price: 3000, fixed: false },
+{ id: 274, name: 'PVC Restrained Flange Adapter 6 in', price: 4400, fixed: false },
+{ id: 275, name: 'PVC Restrained Flange Adapter 8 in', price: 6000, fixed: false },
+{ id: 276, name: 'PVC Restrained Flange Adapter 10 in', price: 11500, fixed: false },
+{ id: 277, name: 'PVC Restrained Flange Adapter 12 in', price: 12500, fixed: false },
+{ id: 278, name: 'Dismantling Joint 2 in', price: 4000, fixed: false },
+{ id: 279, name: 'Dismantling Joint 2-1/2 in', price: 4500, fixed: false },
+{ id: 280, name: 'Dismantling Joint 3 in', price: 5300, fixed: false },
+{ id: 281, name: 'Dismantling Joint 4 in', price: 6500, fixed: false },
+{ id: 282, name: 'Dismantling Joint 6 in', price: 9500, fixed: false },
+{ id: 283, name: 'Dismantling Joint 8 in', price: 13800, fixed: false },
+{ id: 284, name: 'Valve Box Cover 6 in', price: 800, fixed: false },
+];
+const supplierPriceList = String.raw`Elbow 45 2 in - 151
+Elbow 45 2-1/2 in - 207
+Elbow 45 3 in - 298
+Elbow 45 4 in - 517
+Elbow 45 6 in - 1029
+Elbow 45 8 in - 2058
+
+Elbow 90 2 in - 211
+Elbow 90 2-1/2 in - 324
+Elbow 90 3 in - 440
+Elbow 90 4 in - 582
+Elbow 90 6 in - 1097
+Elbow 90 8 in - 3000
+
+Tee 2 in - 311
+Tee 2-1/2 in - 466
+Tee 3 in - 609
+Tee 4 in - 888
+Tee 6 in - 1755
+Tee 8 in - 3958
+
+Tee Reducer 2-1/2 x 2 in - 466
+Tee Reducer 3 x 2 in - 609
+Tee Reducer 4 x 2 in - 888
+Tee Reducer 6 x 2 in - 1755
+Tee Reducer 8 x 2 in - 3958
+
+Cross 2 in - 616
+Cross 2-1/2 in - 808
+Cross 3 in - 1320
+Cross 4 in - 2743
+Cross 6 in - 4768
+
+Reducing Coupling 2-1/2 x 2 in - 400
+Reducing Coupling 3 x 2 in - 500
+Reducing Coupling 4 x 2 in - 580
+Reducing Coupling 6 x 2 in - 1500
+Reducing Coupling 8 x 2 in - 2500
+
+Coupling 2 in - 230
+Coupling 2-1/2 in - 300
+Coupling 3 in - 400
+Coupling 4 in - 450
+Coupling 6 in - 750
+Coupling 8 in - 1300
+
+Eccentric Reducer 3 x 2 in - 449
+Eccentric Reducer 4 x 2 in - 566
+Eccentric Reducer 6 x 3 in - 1271
+Eccentric Reducer 8 x 4 in - 1992
+
+Concentric Reducer 2-1/2 x 2 in - 116
+Concentric Reducer 3 x 2 in - 193
+Concentric Reducer 4 x 2 in - 266
+Concentric Reducer 6 x 2 in - 610
+Concentric Reducer 8 x 2 in - 1058
+
+Cap 2 in - 124
+Cap 2-1/2 in - 146
+Cap 3 in - 207
+Cap 4 in - 498
+Cap 6 in - 706
+
+Flange Adapter 2-1/2 in - 345
+Flange Adapter 3 in - 598
+Flange Adapter 4 in - 716
+Flange Adapter 6 in - 1044
+Flange Adapter 8 in - 1625
+
+Flange 2-1/2 in - 350
+Flange 3 in - 480
+Flange 4 in - 580
+Flange 6 in - 780
+Flange 8 in - 1275
+
+Mechanical Tee Groove 2-1/2 in - 319
+Mechanical Tee Groove 3 in - 452
+Mechanical Tee Groove 4 in - 588
+Mechanical Tee Groove 6 in - 832
+Mechanical Tee Groove 8 in - 1346
+
+Mechanical Tee Threaded 2-1/2 in - 271
+Mechanical Tee Threaded 3 in - 384
+Mechanical Tee Threaded 4 in - 500
+Mechanical Tee Threaded 6 in - 707
+Mechanical Tee Threaded 8 in - 1144
+NRS Gate Valve Flange End 2 in - 6000
+NRS Gate Valve Flange End 2-1/2 in - 6500
+NRS Gate Valve Flange End 3 in - 7800
+NRS Gate Valve Flange End 4 in - 9800
+NRS Gate Valve Flange End 6 in - 12500
+NRS Gate Valve Flange End 8 in - 27000
+NRS Gate Valve Flange End 10 in - 38000
+NRS Gate Valve Flange End 12 in - 60000
+
+OS&Y Gate Valve Flange End 2 in - 10000
+OS&Y Gate Valve Flange End 2-1/2 in - 10500
+OS&Y Gate Valve Flange End 3 in - 11200
+OS&Y Gate Valve Flange End 4 in - 14500
+OS&Y Gate Valve Flange End 6 in - 25000
+OS&Y Gate Valve Flange End 8 in - 40000
+OS&Y Gate Valve Flange End 10 in - 58000
+OS&Y Gate Valve Flange End 12 in - 100000
+
+Butterfly Valve Lever Operated Wafer Type 2 in - 1600
+Butterfly Valve Lever Operated Wafer Type 2-1/2 in - 1800
+Butterfly Valve Lever Operated Wafer Type 3 in - 2100
+Butterfly Valve Lever Operated Wafer Type 4 in - 3000
+Butterfly Valve Lever Operated Wafer Type 5 in - 4000
+Butterfly Valve Lever Operated Wafer Type 6 in - 4500
+Butterfly Valve Lever Operated Wafer Type 8 in - 7500
+Butterfly Valve Lever Operated Wafer Type 10 in - 8500
+Butterfly Valve Lever Operated Wafer Type 12 in - 13500
+
+Butterfly Valve Supervisory Switch Wafer End 2 in - 5000
+Butterfly Valve Supervisory Switch Wafer End 2-1/2 in - 6000
+Butterfly Valve Supervisory Switch Wafer End 3 in - 6500
+Butterfly Valve Supervisory Switch Wafer End 4 in - 7000
+Butterfly Valve Supervisory Switch Wafer End 5 in - 8000
+Butterfly Valve Supervisory Switch Wafer End 6 in - 8800
+Butterfly Valve Supervisory Switch Wafer End 8 in - 14000
+Butterfly Valve Supervisory Switch Wafer End 10 in - 15000
+Butterfly Valve Supervisory Switch Wafer End 12 in - 25000
+
+Y Strainer Flange 2 in - 3500
+Y Strainer Flange 2-1/2 in - 5000
+Y Strainer Flange 3 in - 5500
+Y Strainer Flange 4 in - 9000
+Y Strainer Flange 6 in - 13000
+Y Strainer Flange 8 in - 16000
+Y Strainer Flange 10 in - 30000
+Y Strainer Flange 12 in - 45000
+Y Strainer Flange 16 in - 73000
+
+Swing Check Valve Flange 2 in - 5000
+Swing Check Valve Flange 2-1/2 in - 6800
+Swing Check Valve Flange 3 in - 9500
+Swing Check Valve Flange 4 in - 12800
+Swing Check Valve Flange 6 in - 23000
+Swing Check Valve Flange 8 in - 42000
+Swing Check Valve Flange 10 in - 60000
+Swing Check Valve Flange 12 in - 84000
+
+Single Sphere Flexible Connector 2 in - 1488
+Single Sphere Flexible Connector 2-1/2 in - 2316
+Single Sphere Flexible Connector 3 in - 2730
+Single Sphere Flexible Connector 4 in - 3030
+Single Sphere Flexible Connector 6 in - 8400
+Single Sphere Flexible Connector 8 in - 13500
+Single Sphere Flexible Connector 10 in - 18000
+Single Sphere Flexible Connector 12 in - 26000
+
+Double Sphere Flexible Connector 2 in - 2316
+Double Sphere Flexible Connector 2-1/2 in - 2730
+Double Sphere Flexible Connector 3 in - 3150
+Double Sphere Flexible Connector 4 in - 4050
+Double Sphere Flexible Connector 6 in - 7350
+Double Sphere Flexible Connector 8 in - 7596
+Double Sphere Flexible Connector 10 in - 13500
+Double Sphere Flexible Connector 12 in - 17600
+
+Water Flow Switch 2 in - 1500
+Water Flow Switch 2-1/2 in - 1500
+Water Flow Switch 3 in - 1500
+Water Flow Switch 4 in - 1500
+Water Flow Switch 6 in - 1800
+Water Flow Switch 8 in - 2000
+
+Pressure Switch 2 in - 5000
+Supervisory Switch 2 in - 5000
+
+Water Flow Meter Flange End 2 in - 11800
+Water Flow Meter Flange End 2-1/2 in - 12150
+Water Flow Meter Flange End 3 in - 13600
+Water Flow Meter Flange End 4 in - 15000
+Water Flow Meter Flange End 5 in - 18000
+Water Flow Meter Flange End 6 in - 18500
+Water Flow Meter Flange End 8 in - 22850
+Water Flow Meter Flange End 10 in - 64300
+Water Flow Meter Flange End 12 in - 71500
+BI Elbow 90 1/4 in - 30.00
+BI Elbow 90 3/8 in - 20.50
+BI Elbow 90 1/2 in - 30.00
+BI Elbow 90 3/4 in - 44.25
+BI Elbow 90 1 in - 66.50
+BI Elbow 90 1-1/2 in - 88.50
+BI Elbow 90 2 in - 133.50
+BI Elbow 90 2-1/2 in - 264.00
+BI Elbow 90 3 in - 371.00
+BI Elbow 90 4 in - 675.00
+
+BI Tee 1/4 in - 37.00
+BI Tee 3/8 in - 26.50
+BI Tee 1/2 in - 37.00
+BI Tee 3/4 in - 58.00
+BI Tee 1 in - 93.00
+BI Tee 1-1/2 in - 118.00
+BI Tee 2 in - 174.00
+BI Tee 2-1/2 in - 388.00
+BI Tee 3 in - 498.00
+BI Tee 4 in - 915.00
+
+BI Coupling 1/4 in - 20.25
+BI Coupling 3/8 in - 15.75
+BI Coupling 1/2 in - 20.25
+BI Coupling 3/4 in - 33.75
+BI Coupling 1 in - 48.00
+BI Coupling 1-1/2 in - 58.00
+BI Coupling 2 in - 91.50
+BI Coupling 2-1/2 in - 200.00
+BI Coupling 3 in - 267.00
+BI Coupling 4 in - 420.00
+
+BI Cap 1/4 in - 22.50
+BI Cap 3/8 in - 16.50
+BI Cap 1/2 in - 22.50
+BI Cap 3/4 in - 32.25
+BI Cap 1 in - 50.00
+BI Cap 1-1/2 in - 65.00
+BI Cap 2 in - 88.00
+BI Cap 2-1/2 in - 186.00
+BI Cap 3 in - 252.00
+BI Cap 4 in - 419.00
+
+BI Plug 1/4 in - 18.00
+BI Plug 3/8 in - 14.00
+BI Plug 1/2 in - 16.75
+BI Plug 3/4 in - 23.25
+BI Plug 1 in - 35.50
+BI Plug 1-1/2 in - 42.00
+BI Plug 2 in - 58.00
+BI Plug 2-1/2 in - 141.50
+BI Plug 3 in - 200.00
+BI Plug 4 in - 322.50
+
+BI Cross Tee 1/2 in - 76.00
+BI Cross Tee 3/4 in - 106.25
+BI Cross Tee 1 in - 145.50
+BI Cross Tee 1-1/2 in - 215.00
+BI Cross Tee 2 in - 288.00
+BI Cross Tee 2-1/2 in - 397.00
+BI Cross Tee 3 in - 762.00
+BI Cross Tee 4 in - 1075.00
+BI Cross Tee 5 in - 1974.00
+
+BI Hex Nipple 1/4 in - 25.00
+BI Hex Nipple 3/8 in - 30.00
+BI Hex Nipple 1/2 in - 42.00
+BI Hex Nipple 3/4 in - 75.00
+BI Hex Nipple 1 in - 110.00
+BI Hex Nipple 1-1/2 in - 150.00
+BI Hex Nipple 2 in - 205.00
+BI Hex Nipple 2-1/2 in - 202.00
+BI Hex Nipple 3 in - 350.00
+BI Hex Nipple 4 in - 530.00
+
+PVC Saddle Clamp 63 x 1/2 - 250
+PVC Saddle Clamp 63 x 3/4 - 250
+PVC Saddle Clamp 63 x 1 - 250
+PVC Saddle Clamp 75 x 1/2 - 290
+PVC Saddle Clamp 75 x 3/4 - 290
+PVC Saddle Clamp 75 x 1 - 290
+PVC Saddle Clamp 110 x 1/2 - 395
+PVC Saddle Clamp 110 x 3/4 - 395
+PVC Saddle Clamp 110 x 1 - 395
+PVC Saddle Clamp 160 x 1/2 - 605
+PVC Saddle Clamp 160 x 3/4 - 605
+PVC Saddle Clamp 160 x 1 - 605
+PVC Saddle Clamp 225 x 1/2 - 950
+PVC Saddle Clamp 225 x 3/4 - 950
+PVC Saddle Clamp 225 x 1 - 950
+
+CI Saddle Clamp 3 x 2 - 500
+CI Saddle Clamp 4 x 2 - 635
+CI Saddle Clamp 6 x 2 - 910
+CI Saddle Clamp 8 x 2 - 1320
+CI Saddle Clamp 10 x 2 - 1945
+
+UPVC Coupling 2 in - 13.60
+UPVC Coupling 3 in - 28.60
+UPVC Coupling 4 in - 54.40
+
+UPVC Elbow 90 2 in - 27.20
+UPVC Elbow 90 3 in - 49.00
+UPVC Elbow 90 4 in - 61.60
+
+UPVC Elbow 45 2 in - 21.70
+UPVC Elbow 45 3 in - 39.40
+UPVC Elbow 45 4 in - 62.50
+
+UPVC Tee 2 in - 38.10
+UPVC Tee 3 in - 87.00
+UPVC Tee 4 in - 147.00
+
+UPVC Wye 2 in - 35.40
+UPVC Wye 3 in - 84.30
+UPVC Wye 4 in - 131.00
+
+UPVC Tee Reducer 3 x 2 - 81.60
+UPVC Tee Reducer 4 x 2 - 114.00
+UPVC Tee Reducer 4 x 3 - 125.10
+
+UPVC Wye Reducer 3 x 2 - 76.20
+UPVC Wye Reducer 4 x 2 - 109.00
+UPVC Wye Reducer 4 x 3 - 119.70
+
+UPVC Cleanout w/ O-ring 2 in - 21.80
+UPVC Cleanout w/ O-ring 3 in - 38.10
+UPVC Cleanout w/ O-ring 4 in - 64.00
+
+UPVC P-Trap w/ O-ring 2 in - 84.30
+UPVC P-Trap w/ O-ring 3 in - 150.00
+UPVC P-Trap w/ O-ring 4 in - 204.00
+
+UPVC Air Vent Cap 2 in - 19.20
+UPVC Air Vent Cap 3 in - 33.60
+UPVC Air Vent Cap 4 in - 56.00
+
+Drainage Non-Return Valve 4 in - 4950
+Wet Alarm Check Valve Groove 3 in - 45000
+Wet Alarm Check Valve Groove 4 in - 56000
+Wet Alarm Check Valve Groove 6 in - 65000
+Wet Alarm Check Valve Groove 8 in - 80000
+Foot Valve Flange 2 in - 2800
+Foot Valve Flange 2-1/2 in - 3500
+Foot Valve Flange 3 in - 4500
+Foot Valve Flange 4 in - 6000
+Foot Valve Flange 5 in - 9000
+Foot Valve Flange 6 in - 13000
+Foot Valve Flange 8 in - 20000
+
+Spring Loaded Foot Valve Flange 2 in - 3000
+Spring Loaded Foot Valve Flange 2-1/2 in - 3800
+Spring Loaded Foot Valve Flange 3 in - 5000
+Spring Loaded Foot Valve Flange 4 in - 6500
+Spring Loaded Foot Valve Flange 5 in - 10500
+Spring Loaded Foot Valve Flange 6 in - 14500
+Spring Loaded Foot Valve Flange 8 in - 22000
+
+Universal Flange Adapter 2 in - 1100
+Universal Flange Adapter 2-1/2 in - 1200
+Universal Flange Adapter 3 in - 1250
+Universal Flange Adapter 4 in - 1500
+Universal Flange Adapter 6 in - 2200
+Universal Flange Adapter 8 in - 2700
+Universal Flange Adapter 10 in - 4300
+Universal Flange Adapter 12 in - 5000
+
+PVC Restrained Flange Adapter 2 in - 2200
+PVC Restrained Flange Adapter 2-1/2 in - 2400
+PVC Restrained Flange Adapter 3 in - 2450
+PVC Restrained Flange Adapter 4 in - 3000
+PVC Restrained Flange Adapter 6 in - 4400
+PVC Restrained Flange Adapter 8 in - 6000
+PVC Restrained Flange Adapter 10 in - 11500
+PVC Restrained Flange Adapter 12 in - 12500
+
+Swing Check Valve Flange End 2 in - 4500
+Swing Check Valve Flange End 2-1/2 in - 5300
+Swing Check Valve Flange End 3 in - 6800
+Swing Check Valve Flange End 4 in - 8800
+Swing Check Valve Flange End 6 in - 16000
+Swing Check Valve Flange End 8 in - 26000
+Swing Check Valve Flange End 10 in - 42500
+Swing Check Valve Flange End 12 in - 55000
+
+Swing Check Valve with Counter Weight 2 in - 5500
+Swing Check Valve with Counter Weight 2-1/2 in - 6400
+Swing Check Valve with Counter Weight 3 in - 8200
+Swing Check Valve with Counter Weight 4 in - 10800
+Swing Check Valve with Counter Weight 6 in - 19000
+Swing Check Valve with Counter Weight 8 in - 31000
+Swing Check Valve with Counter Weight 10 in - 50000
+Swing Check Valve with Counter Weight 12 in - 65000
+
+STC Mechanical Coupling 2 in - 1150
+STC Mechanical Coupling 2-1/2 in - 1300
+STC Mechanical Coupling 3 in - 1500
+STC Mechanical Coupling 4 in - 2000
+STC Mechanical Coupling 6 in - 2990
+STC Mechanical Coupling 8 in - 4025
+STC Mechanical Coupling 10 in - 5200
+STC Mechanical Coupling 12 in - 6325
+
+Stainless Steel Flexible Coupling 2 in - 3200
+Stainless Steel Flexible Coupling 2-1/2 in - 3600
+Stainless Steel Flexible Coupling 3 in - 4800
+Stainless Steel Flexible Coupling 4 in - 6000
+Stainless Steel Flexible Coupling 6 in - 10000
+Stainless Steel Flexible Coupling 8 in - 13500
+Stainless Steel Flexible Coupling 10 in - 18000
+Stainless Steel Flexible Coupling 12 in - 26000
+
+Hubless Stainless Coupling 2 in - 165
+Hubless Stainless Coupling 3 in - 200
+Hubless Stainless Coupling 4 in - 230
+Hubless Stainless Coupling 6 in - 600
+Hubless Stainless Coupling 8 in - 850
+
+DI Mechanical Tee 2 in - 2900
+DI Mechanical Tee 2-1/2 in - 3600
+DI Mechanical Tee 3 in - 5600
+DI Mechanical Tee 4 in - 10000
+DI Mechanical Tee 6 in - 14000
+
+Butterfly Valve Lever Lug Type 2 in - 2000
+Butterfly Valve Lever Lug Type 2-1/2 in - 2300
+Butterfly Valve Lever Lug Type 3 in - 3000
+Butterfly Valve Lever Lug Type 4 in - 3600
+Butterfly Valve Lever Lug Type 5 in - 5300
+Butterfly Valve Lever Lug Type 6 in - 5400
+Butterfly Valve Lever Lug Type 8 in - 9000
+
+NRS Gate Valve Groove End 2 in - 5300
+NRS Gate Valve Groove End 2-1/2 in - 7000
+NRS Gate Valve Groove End 3 in - 8500
+NRS Gate Valve Groove End 4 in - 10500
+NRS Gate Valve Groove End 6 in - 17000
+NRS Gate Valve Groove End 8 in - 31500
+NRS Gate Valve Groove End 10 in - 45000
+NRS Gate Valve Groove End 12 in - 63000
+
+OS&Y Gate Valve Groove End 2 in - 7000
+OS&Y Gate Valve Groove End 2-1/2 in - 7500
+OS&Y Gate Valve Groove End 3 in - 9000
+OS&Y Gate Valve Groove End 4 in - 12500
+OS&Y Gate Valve Groove End 6 in - 21000
+OS&Y Gate Valve Groove End 8 in - 35000
+OS&Y Gate Valve Groove End 10 in - 55000
+OS&Y Gate Valve Groove End 12 in - 75000
+
+Y Strainer Groove 2 in - 1900
+Y Strainer Groove 2-1/2 in - 2900
+Y Strainer Groove 3 in - 4100
+Y Strainer Groove 4 in - 6100
+Y Strainer Groove 6 in - 9500
+Y Strainer Groove 8 in - 13500
+Y Strainer Groove 10 in - 46000
+Y Strainer Groove 12 in - 65000`;
+const parseSupplierPriceList=(text)=>text.split('\n').map((line,idx)=>{const cleaned=line.trim();if(!cleaned)return null;const match=cleaned.match(/^(.+?)\s+-\s+([\d,.]+)\s*$/);if(!match)return null;return {id:10000+idx,name:match[1].trim(),price:Number(match[2].replace(/,/g,'')),fixed:false};}).filter(Boolean);
+const supplierItems=parseSupplierPriceList(supplierPriceList);
+const manualQA=[{ q:'What is the payment term?', a:'50% payment to proceed with the order and 50% payment upon delivery/shipment.' },{ q:'What is price validity?', a:'5 days.' },{ q:'What is delivery schedule?', a:'2–5 days for on-stock items and 5–6 weeks for indent orders.' },{ q:'Are returns allowed?', a:'No return or replacement unless the item has factory defect.' }];
+const inferCategories=(name)=>{const n=name.toLowerCase(),set=new Set();if(n.includes('meter'))set.add('Meters');if(n.includes('hdpe'))set.add('HDPE');if(n.includes('ppr'))set.add('PPR');if(n.includes('upvc')||n.includes('pvc'))set.add('PVC/uPVC');if(n.includes('valve'))set.add('Valves');if(n.includes('flange'))set.add('Flanges');if(n.includes('fire')||n.includes('hydrant')||n.includes('siamese')||n.includes('mech groove'))set.add('Fire Protection');if(n.includes('bi ')||n.includes('gi '))set.add('BI/GI');if(!set.size)set.add('Accessories');return [...set];};
+const brandFromName=(name)=>['Ecotech','Aquajet','STC','Leviya'].find(b=>name.toLowerCase().includes(b.toLowerCase()))||'';
+const parseItem=(i)=>{const size=(i.name.match(/\b\d+(?:-\d+\/\d+|\/\d+|\.\d+)?\s*(?:mm|in)\b/i)||[''])[0];const material=(i.name.match(/(cast iron|brass|bi|gi|hdpe|ppr|upvc|pvc)/i)||[''])[0].toLowerCase();const type=(i.name.match(/(sdr\d+|sch\d+|class\s?\d+|threaded|flanged|welded|vertical|horizontal)/i)||[''])[0].toLowerCase();return {...i,size,material,type,brand:brandFromName(i.name),categories:i.categories?.length?i.categories:inferCategories(i.name)};};
+const parsedItems=[...items,...supplierItems].map(parseItem);
+const dedupeItems=(arr)=>{const map=new Map();for(const item of arr){const key=[item.name.toLowerCase(),item.size,item.brand.toLowerCase(),item.material,item.type].join('|');const prev=map.get(key);if(!prev||item.price>prev.price)map.set(key,item);}return [...map.values()];};
+const normalizeItems=dedupeItems(parsedItems);
+const categories=['All',...new Set(normalizeItems.flatMap(i=>i.categories))];
+const toCurrency=(v)=>new Intl.NumberFormat('en-PH',{style:'currency',currency:'PHP'}).format(v);
+const markedPrice=(item,m)=>item.fixed?item.price:item.price*(1+m/100);
+const mmEquivalent=(name)=>{const m=name.match(/(\d+(?:\.\d+)?)\s*in/i);if(!m)return '';return `${(Number(m[1])*25.4).toFixed(1)} mm`;};
+const state={activeCategory:'All',copiedId:null,quote:new Map(),discountPercent:0,calcDisplay:'0',z:2200,autoQuoteRows:[]};
+const el={search:document.getElementById('search'),markup:document.getElementById('markup'),grid:document.getElementById('item-grid'),categories:document.getElementById('category-bar'),dock:document.getElementById('dock'),widgets:document.getElementById('widgets')};
+const widgets={quotation:{title:'Quotation',icon:'🧾',default:{w:980,h:430,x:120,y:90}},calculator:{title:'Calculator',icon:'🧮',default:{w:320,h:360,x:300,y:120}},conversion:{title:'Conversion Calculator',icon:'📏',default:{w:450,h:430,x:260,y:110}},qa:{title:'Q&A Helper',icon:'❓',default:{w:540,h:360,x:220,y:120}},autoQuote:{title:'Auto Quote Parser',icon:'🤖',default:{w:1040,h:520,x:180,y:80}}};
+const dockItems=[{id:'quotation',label:'Quotation',icon:'🧾'},{id:'calculator',label:'Calculator',icon:'🧮'},{id:'conversion',label:'Conversion Calculator',icon:'📏'},{id:'qa',label:'Q&A Helper',icon:'❓'},{id:'autoQuote',label:'Auto Quote Parser',icon:'🤖'}];
+const inchEquivalent=(name)=>{const m=name.match(/(\d+(?:\.\d+)?)\s*mm\b/i);if(!m)return '';return `${(Number(m[1])/25.4).toFixed(2)} in`;};
+const searchIndex=(item)=>[item.name,item.size,item.brand,item.material,item.type,...item.categories,item.keywords,item.notes,mmEquivalent(item.name),inchEquivalent(item.name)].filter(Boolean).join(' ').toLowerCase();
+function renderCategories(){el.categories.innerHTML='';categories.forEach(c=>{const b=document.createElement('button');b.className=`category-btn${c===state.activeCategory?' active':''}`;b.textContent=c;b.onclick=()=>{state.activeCategory=c;renderItems();};el.categories.appendChild(b);});}
+function toggleQuote(item){if(state.quote.has(item.id))state.quote.delete(item.id);else state.quote.set(item.id,{itemId:item.id,qty:1,unit:'pc'});renderItems();if(document.getElementById('widget-quotation')&&!document.getElementById('widget-quotation').hidden)renderQuotation();}
+function renderItems(){const rawQuery=el.search.value.toLowerCase();const tokens=[...new Set(rawQuery.split(/\s+/).map(t=>t.trim()).filter(Boolean))];const m=Number(el.markup.value)||0;const matched=normalizeItems.filter(item=>{if(state.activeCategory!=='All'&&!item.categories.includes(state.activeCategory))return false;if(!tokens.length)return true;const haystack=searchIndex(item);return tokens.some(token=>haystack.includes(token));});const seen=new Set();const shown=matched.filter(item=>{if(seen.has(item.id))return false;seen.add(item.id);return true;});el.grid.innerHTML='';shown.forEach(item=>{const selected=state.quote.has(item.id);const card=document.createElement('article');card.className='item-card';card.innerHTML=`<h2 style="font-size:1rem;margin:0">${item.name}</h2><div style="display:flex;gap:.35rem;flex-wrap:wrap">${item.categories.map(c=>`<span class='small-note' style='background:#e2e8f0;padding:.12rem .45rem;border-radius:999px'>${c}</span>`).join('')}${item.brand?`<span class='small-note' style='background:#dcfce7;padding:.12rem .45rem;border-radius:999px'>Brand: ${item.brand}</span>`:''}${item.fixed?`<span class='small-note' style='background:#fee2e2;padding:.12rem .45rem;border-radius:999px'>SP Locked</span>`:''}</div><p class='small-note'>Size: ${item.size||'N/A'} ${mmEquivalent(item.name)?`• ${mmEquivalent(item.name)}`:''}</p><p>Base: ${toCurrency(item.price)}</p><p>Unit Cost: <strong>${toCurrency(markedPrice(item,m))}</strong></p><div class='item-actions'><button data-copy>${state.copiedId===item.id?'Copied!':'Copy'}</button><button class="toggle-btn ${selected?'selected':''}" data-quote>${selected?'Remove':'Add to Quote'}</button></div>`;card.querySelector('[data-copy]').onclick=async()=>{try{await navigator.clipboard.writeText(`${item.name}	${toCurrency(markedPrice(item,m))}`);}catch{}state.copiedId=item.id;renderItems();setTimeout(()=>{state.copiedId=null;renderItems();},900);};card.querySelector('[data-quote]').onclick=()=>toggleQuote(item);el.grid.appendChild(card);});}
+function renderDock(){el.dock.innerHTML='';dockItems.forEach(d=>{const b=document.createElement('button');b.className='dock-btn';b.title=d.label;b.textContent=d.icon;b.onclick=()=>openWidget(d.id);el.dock.appendChild(b);});}
+function widgetShell(key){const w=widgets[key],id=`widget-${key}`;if(document.getElementById(id))return document.getElementById(id);const n=document.createElement('article');n.id=id;n.className='widget';n.hidden=true;n.innerHTML=`<div class="widget-header"><strong>${w.title}</strong><div class="widget-actions"><button data-reset>Reset</button><button data-max>Maximize</button><button data-close>✕</button></div></div><div class="widget-body"></div>`;el.widgets.appendChild(n);wireWidget(n,key);applyDefaultSize(n,key);return n;}
+function applyDefaultSize(node,key){const d=widgets[key].default;node.style.width=d.w+'px';node.style.height=d.h+'px';node.style.left=d.x+'px';node.style.top=d.y+'px';node.dataset.max='0';}
+function openWidget(key){const n=widgetShell(key);n.hidden=false;if(key==='quotation')renderQuotation();if(key==='calculator')renderCalculator();if(key==='conversion')renderConversion();if(key==='qa')renderQA();if(key==='autoQuote')renderAutoQuote();}
+function wireWidget(node,key){const header=node.querySelector('.widget-header');let sx=0,sy=0,ox=0,oy=0,drag=false;header.onmousedown=(e)=>{if(e.target.closest('button'))return;drag=true;sx=e.clientX;sy=e.clientY;ox=node.offsetLeft;oy=node.offsetTop;};window.addEventListener('mousemove',e=>{if(!drag)return;node.style.left=(ox+e.clientX-sx)+'px';node.style.top=(oy+e.clientY-sy)+'px';});window.addEventListener('mouseup',()=>drag=false);node.querySelector('[data-close]').onclick=()=>node.hidden=true;node.querySelector('[data-reset]').onclick=()=>applyDefaultSize(node,key);node.querySelector('[data-max]').onclick=()=>{if(node.dataset.max==='1'){const p=JSON.parse(node.dataset.prev);Object.assign(node.style,p);node.dataset.max='0';}else{node.dataset.prev=JSON.stringify({left:node.style.left,top:node.style.top,width:node.style.width,height:node.style.height});node.style.left='16px';node.style.top='16px';node.style.width=(window.innerWidth-32)+'px';node.style.height=(window.innerHeight-32)+'px';node.dataset.max='1';}};}
+function renderCalculator(){const n=document.querySelector('#widget-calculator .widget-body');const buttons=['7','8','9','/','4','5','6','*','1','2','3','-','0','.','=','+'];n.innerHTML=`<div class='calc-display'>${state.calcDisplay}</div><div class='calc-grid'>${buttons.map(b=>`<button data-calc='${b}'>${b}</button>`).join('')}<button data-calc='C'>C</button></div>`;n.querySelectorAll('[data-calc]').forEach(b=>b.onclick=()=>{const v=b.dataset.calc;if(v==='C')state.calcDisplay='0';else if(v==='='){try{state.calcDisplay=String(Function(`return (${state.calcDisplay})`)());}catch{state.calcDisplay='Error';}}else state.calcDisplay=(state.calcDisplay==='0'||state.calcDisplay==='Error')?v:state.calcDisplay+v;renderCalculator();});}
+function renderQuotation(){const n=document.querySelector('#widget-quotation .widget-body');const m=Number(el.markup.value)||0;const rows=[...state.quote.values()].map((r,idx)=>{const item=normalizeItems.find(x=>x.id===r.itemId);const unitCost=markedPrice(item,m),amount=r.qty*unitCost;return {idx:idx+1,...r,item,unitCost,amount};});const subtotal=rows.reduce((s,r)=>s+r.amount,0),discountAmount=subtotal*(state.discountPercent/100),grand=subtotal-discountAmount;n.innerHTML=`<div style='display:flex;gap:.4rem;margin-bottom:.5rem'><button data-copy-quote>Copy quotation table</button><button data-clear style='background:#475569'>Clear quotation</button></div><table><thead><tr><th>ITEM</th><th>QTY</th><th>UNIT</th><th>DESCRIPTION</th><th>UNIT COST</th><th>AMOUNT</th><th></th></tr></thead><tbody>${rows.map(r=>`<tr><td>${r.idx}</td><td><input type='number' min='0' step='1' value='${r.qty}' data-qty='${r.itemId}'/></td><td><input value='${r.unit}' data-unit='${r.itemId}'/></td><td>${r.item.name}</td><td class='money'>${toCurrency(r.unitCost)}</td><td class='money'>${toCurrency(r.amount)}</td><td><button data-remove='${r.itemId}'>Remove</button></td></tr>`).join('')}</tbody></table><div class='quotation-summary'><div>SUBTOTAL: <strong>${toCurrency(subtotal)}</strong></div><label>Discount (%) <input id='discount' type='number' step='0.01' min='0' max='100' value='${state.discountPercent}'/></label><div>Discount Amount: <strong>${toCurrency(discountAmount)}</strong></div><div>GRAND TOTAL: <strong>${toCurrency(grand)}</strong></div></div>`;
+n.querySelectorAll('[data-remove]').forEach(b=>b.onclick=()=>{state.quote.delete(Number(b.dataset.remove));renderQuotation();renderItems();});n.querySelectorAll('[data-qty]').forEach(i=>i.oninput=()=>{const id=Number(i.dataset.qty),r=state.quote.get(id);r.qty=Math.max(0,Number(i.value)||0);state.quote.set(id,r);renderQuotation();});n.querySelectorAll('[data-unit]').forEach(i=>i.oninput=()=>{const id=Number(i.dataset.unit),r=state.quote.get(id);r.unit=i.value||'pc';state.quote.set(id,r);});n.querySelector('#discount').oninput=(e)=>{state.discountPercent=Math.max(0,Number(e.target.value)||0);renderQuotation();};n.querySelector('[data-clear]').onclick=()=>{state.quote.clear();renderQuotation();renderItems();};n.querySelector('[data-copy-quote]').onclick=async()=>{const lines=['ITEM	QTY	UNIT	DESCRIPTION	UNIT COST	AMOUNT'];rows.forEach(r=>lines.push(`${r.idx}	${r.qty}	${r.unit}	${r.item.name}	${r.unitCost.toFixed(2)}	${r.amount.toFixed(2)}`));lines.push(`				SUBTOTAL	${subtotal.toFixed(2)}`);lines.push(`				DISCOUNT (${state.discountPercent}%)	${discountAmount.toFixed(2)}`);lines.push(`				GRAND TOTAL	${grand.toFixed(2)}`);await navigator.clipboard.writeText(lines.join('\n'));};}
+function renderConversion(){const n=document.querySelector('#widget-conversion .widget-body');n.innerHTML=`<label>Value <input id='conv-val' type='number' step='any' value='1'></label><label>Convert <select id='conv-type'><option value='mm_in'>mm to inches</option><option value='in_mm'>inches to mm</option><option value='cm_in'>cm to inches</option><option value='in_cm'>inches to cm</option><option value='m_ft'>meters to feet</option><option value='ft_m'>feet to meters</option></select></label><button id='conv-run'>Compute</button><div class='qa-result' id='conv-out'>Result: -</div><div class='small-note'>Approximate nominal pipe size only, verify specs.</div><table><tbody><tr><td>25mm</td><td>≈ 1 in</td></tr><tr><td>40mm</td><td>≈ 1-1/2 in</td></tr><tr><td>50mm</td><td>≈ 2 in</td></tr><tr><td>65mm</td><td>≈ 2-1/2 in</td></tr><tr><td>80mm</td><td>≈ 3 in</td></tr><tr><td>100mm</td><td>≈ 4 in</td></tr><tr><td>150mm</td><td>≈ 6 in</td></tr><tr><td>200mm</td><td>≈ 8 in</td></tr><tr><td>250mm</td><td>≈ 10 in</td></tr><tr><td>300mm</td><td>≈ 12 in</td></tr></tbody></table>`;n.querySelector('#conv-run').onclick=()=>{const v=Number(n.querySelector('#conv-val').value)||0,t=n.querySelector('#conv-type').value;const map={mm_in:v/25.4,in_mm:v*25.4,cm_in:v/2.54,in_cm:v*2.54,m_ft:v*3.28084,ft_m:v/3.28084};n.querySelector('#conv-out').textContent=`Result: ${map[t].toFixed(4)}`;};}
+function renderQA(){const n=document.querySelector('#widget-qa .widget-body');n.innerHTML=`<label>Manual FAQ search <input id='qa-input' placeholder='Type your question'/></label><button data-ask>Search Answer</button><div id='qa-result' class='qa-result'></div>`;const result=n.querySelector('#qa-result');n.querySelector('[data-ask]').onclick=()=>{const q=n.querySelector('#qa-input').value.trim().toLowerCase();const hit=manualQA.find(x=>q&&(x.q.toLowerCase().includes(q)||q.includes(x.q.toLowerCase().replace(/[?]/g,''))));if(hit)result.innerHTML=`<strong>Answer:</strong> ${hit.a}<br><em>Source: Manual Info</em>`;else result.innerHTML=`<strong>Answer:</strong> No direct manual match found. Verify before sending to client.<br><em>Source: Not verified / Needs checking</em>`;};}
 ...items.slice(0,284),
 
 // ===== MERGED PART START =====
