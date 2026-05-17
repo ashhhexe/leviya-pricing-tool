@@ -334,11 +334,452 @@ const items = [
 { id: 283, name: 'Dismantling Joint 8 in', price: 13800, fixed: false },
 { id: 284, name: 'Valve Box Cover 6 in', price: 800, fixed: false },
 ];
+const supplierPriceList = String.raw`Elbow 45 2 in - 151
+Elbow 45 2-1/2 in - 207
+Elbow 45 3 in - 298
+Elbow 45 4 in - 517
+Elbow 45 6 in - 1029
+Elbow 45 8 in - 2058
+
+Elbow 90 2 in - 211
+Elbow 90 2-1/2 in - 324
+Elbow 90 3 in - 440
+Elbow 90 4 in - 582
+Elbow 90 6 in - 1097
+Elbow 90 8 in - 3000
+
+Tee 2 in - 311
+Tee 2-1/2 in - 466
+Tee 3 in - 609
+Tee 4 in - 888
+Tee 6 in - 1755
+Tee 8 in - 3958
+
+Tee Reducer 2-1/2 x 2 in - 466
+Tee Reducer 3 x 2 in - 609
+Tee Reducer 4 x 2 in - 888
+Tee Reducer 6 x 2 in - 1755
+Tee Reducer 8 x 2 in - 3958
+
+Cross 2 in - 616
+Cross 2-1/2 in - 808
+Cross 3 in - 1320
+Cross 4 in - 2743
+Cross 6 in - 4768
+
+Reducing Coupling 2-1/2 x 2 in - 400
+Reducing Coupling 3 x 2 in - 500
+Reducing Coupling 4 x 2 in - 580
+Reducing Coupling 6 x 2 in - 1500
+Reducing Coupling 8 x 2 in - 2500
+
+Coupling 2 in - 230
+Coupling 2-1/2 in - 300
+Coupling 3 in - 400
+Coupling 4 in - 450
+Coupling 6 in - 750
+Coupling 8 in - 1300
+
+Eccentric Reducer 3 x 2 in - 449
+Eccentric Reducer 4 x 2 in - 566
+Eccentric Reducer 6 x 3 in - 1271
+Eccentric Reducer 8 x 4 in - 1992
+
+Concentric Reducer 2-1/2 x 2 in - 116
+Concentric Reducer 3 x 2 in - 193
+Concentric Reducer 4 x 2 in - 266
+Concentric Reducer 6 x 2 in - 610
+Concentric Reducer 8 x 2 in - 1058
+
+Cap 2 in - 124
+Cap 2-1/2 in - 146
+Cap 3 in - 207
+Cap 4 in - 498
+Cap 6 in - 706
+
+Flange Adapter 2-1/2 in - 345
+Flange Adapter 3 in - 598
+Flange Adapter 4 in - 716
+Flange Adapter 6 in - 1044
+Flange Adapter 8 in - 1625
+
+Flange 2-1/2 in - 350
+Flange 3 in - 480
+Flange 4 in - 580
+Flange 6 in - 780
+Flange 8 in - 1275
+
+Mechanical Tee Groove 2-1/2 in - 319
+Mechanical Tee Groove 3 in - 452
+Mechanical Tee Groove 4 in - 588
+Mechanical Tee Groove 6 in - 832
+Mechanical Tee Groove 8 in - 1346
+
+Mechanical Tee Threaded 2-1/2 in - 271
+Mechanical Tee Threaded 3 in - 384
+Mechanical Tee Threaded 4 in - 500
+Mechanical Tee Threaded 6 in - 707
+Mechanical Tee Threaded 8 in - 1144
+NRS Gate Valve Flange End 2 in - 6000
+NRS Gate Valve Flange End 2-1/2 in - 6500
+NRS Gate Valve Flange End 3 in - 7800
+NRS Gate Valve Flange End 4 in - 9800
+NRS Gate Valve Flange End 6 in - 12500
+NRS Gate Valve Flange End 8 in - 27000
+NRS Gate Valve Flange End 10 in - 38000
+NRS Gate Valve Flange End 12 in - 60000
+
+OS&Y Gate Valve Flange End 2 in - 10000
+OS&Y Gate Valve Flange End 2-1/2 in - 10500
+OS&Y Gate Valve Flange End 3 in - 11200
+OS&Y Gate Valve Flange End 4 in - 14500
+OS&Y Gate Valve Flange End 6 in - 25000
+OS&Y Gate Valve Flange End 8 in - 40000
+OS&Y Gate Valve Flange End 10 in - 58000
+OS&Y Gate Valve Flange End 12 in - 100000
+
+Butterfly Valve Lever Operated Wafer Type 2 in - 1600
+Butterfly Valve Lever Operated Wafer Type 2-1/2 in - 1800
+Butterfly Valve Lever Operated Wafer Type 3 in - 2100
+Butterfly Valve Lever Operated Wafer Type 4 in - 3000
+Butterfly Valve Lever Operated Wafer Type 5 in - 4000
+Butterfly Valve Lever Operated Wafer Type 6 in - 4500
+Butterfly Valve Lever Operated Wafer Type 8 in - 7500
+Butterfly Valve Lever Operated Wafer Type 10 in - 8500
+Butterfly Valve Lever Operated Wafer Type 12 in - 13500
+
+Butterfly Valve Supervisory Switch Wafer End 2 in - 5000
+Butterfly Valve Supervisory Switch Wafer End 2-1/2 in - 6000
+Butterfly Valve Supervisory Switch Wafer End 3 in - 6500
+Butterfly Valve Supervisory Switch Wafer End 4 in - 7000
+Butterfly Valve Supervisory Switch Wafer End 5 in - 8000
+Butterfly Valve Supervisory Switch Wafer End 6 in - 8800
+Butterfly Valve Supervisory Switch Wafer End 8 in - 14000
+Butterfly Valve Supervisory Switch Wafer End 10 in - 15000
+Butterfly Valve Supervisory Switch Wafer End 12 in - 25000
+
+Y Strainer Flange 2 in - 3500
+Y Strainer Flange 2-1/2 in - 5000
+Y Strainer Flange 3 in - 5500
+Y Strainer Flange 4 in - 9000
+Y Strainer Flange 6 in - 13000
+Y Strainer Flange 8 in - 16000
+Y Strainer Flange 10 in - 30000
+Y Strainer Flange 12 in - 45000
+Y Strainer Flange 16 in - 73000
+
+Swing Check Valve Flange 2 in - 5000
+Swing Check Valve Flange 2-1/2 in - 6800
+Swing Check Valve Flange 3 in - 9500
+Swing Check Valve Flange 4 in - 12800
+Swing Check Valve Flange 6 in - 23000
+Swing Check Valve Flange 8 in - 42000
+Swing Check Valve Flange 10 in - 60000
+Swing Check Valve Flange 12 in - 84000
+
+Single Sphere Flexible Connector 2 in - 1488
+Single Sphere Flexible Connector 2-1/2 in - 2316
+Single Sphere Flexible Connector 3 in - 2730
+Single Sphere Flexible Connector 4 in - 3030
+Single Sphere Flexible Connector 6 in - 8400
+Single Sphere Flexible Connector 8 in - 13500
+Single Sphere Flexible Connector 10 in - 18000
+Single Sphere Flexible Connector 12 in - 26000
+
+Double Sphere Flexible Connector 2 in - 2316
+Double Sphere Flexible Connector 2-1/2 in - 2730
+Double Sphere Flexible Connector 3 in - 3150
+Double Sphere Flexible Connector 4 in - 4050
+Double Sphere Flexible Connector 6 in - 7350
+Double Sphere Flexible Connector 8 in - 7596
+Double Sphere Flexible Connector 10 in - 13500
+Double Sphere Flexible Connector 12 in - 17600
+
+Water Flow Switch 2 in - 1500
+Water Flow Switch 2-1/2 in - 1500
+Water Flow Switch 3 in - 1500
+Water Flow Switch 4 in - 1500
+Water Flow Switch 6 in - 1800
+Water Flow Switch 8 in - 2000
+
+Pressure Switch 2 in - 5000
+Supervisory Switch 2 in - 5000
+
+Water Flow Meter Flange End 2 in - 11800
+Water Flow Meter Flange End 2-1/2 in - 12150
+Water Flow Meter Flange End 3 in - 13600
+Water Flow Meter Flange End 4 in - 15000
+Water Flow Meter Flange End 5 in - 18000
+Water Flow Meter Flange End 6 in - 18500
+Water Flow Meter Flange End 8 in - 22850
+Water Flow Meter Flange End 10 in - 64300
+Water Flow Meter Flange End 12 in - 71500
+BI Elbow 90 1/4 in - 30.00
+BI Elbow 90 3/8 in - 20.50
+BI Elbow 90 1/2 in - 30.00
+BI Elbow 90 3/4 in - 44.25
+BI Elbow 90 1 in - 66.50
+BI Elbow 90 1-1/2 in - 88.50
+BI Elbow 90 2 in - 133.50
+BI Elbow 90 2-1/2 in - 264.00
+BI Elbow 90 3 in - 371.00
+BI Elbow 90 4 in - 675.00
+
+BI Tee 1/4 in - 37.00
+BI Tee 3/8 in - 26.50
+BI Tee 1/2 in - 37.00
+BI Tee 3/4 in - 58.00
+BI Tee 1 in - 93.00
+BI Tee 1-1/2 in - 118.00
+BI Tee 2 in - 174.00
+BI Tee 2-1/2 in - 388.00
+BI Tee 3 in - 498.00
+BI Tee 4 in - 915.00
+
+BI Coupling 1/4 in - 20.25
+BI Coupling 3/8 in - 15.75
+BI Coupling 1/2 in - 20.25
+BI Coupling 3/4 in - 33.75
+BI Coupling 1 in - 48.00
+BI Coupling 1-1/2 in - 58.00
+BI Coupling 2 in - 91.50
+BI Coupling 2-1/2 in - 200.00
+BI Coupling 3 in - 267.00
+BI Coupling 4 in - 420.00
+
+BI Cap 1/4 in - 22.50
+BI Cap 3/8 in - 16.50
+BI Cap 1/2 in - 22.50
+BI Cap 3/4 in - 32.25
+BI Cap 1 in - 50.00
+BI Cap 1-1/2 in - 65.00
+BI Cap 2 in - 88.00
+BI Cap 2-1/2 in - 186.00
+BI Cap 3 in - 252.00
+BI Cap 4 in - 419.00
+
+BI Plug 1/4 in - 18.00
+BI Plug 3/8 in - 14.00
+BI Plug 1/2 in - 16.75
+BI Plug 3/4 in - 23.25
+BI Plug 1 in - 35.50
+BI Plug 1-1/2 in - 42.00
+BI Plug 2 in - 58.00
+BI Plug 2-1/2 in - 141.50
+BI Plug 3 in - 200.00
+BI Plug 4 in - 322.50
+
+BI Cross Tee 1/2 in - 76.00
+BI Cross Tee 3/4 in - 106.25
+BI Cross Tee 1 in - 145.50
+BI Cross Tee 1-1/2 in - 215.00
+BI Cross Tee 2 in - 288.00
+BI Cross Tee 2-1/2 in - 397.00
+BI Cross Tee 3 in - 762.00
+BI Cross Tee 4 in - 1075.00
+BI Cross Tee 5 in - 1974.00
+
+BI Hex Nipple 1/4 in - 25.00
+BI Hex Nipple 3/8 in - 30.00
+BI Hex Nipple 1/2 in - 42.00
+BI Hex Nipple 3/4 in - 75.00
+BI Hex Nipple 1 in - 110.00
+BI Hex Nipple 1-1/2 in - 150.00
+BI Hex Nipple 2 in - 205.00
+BI Hex Nipple 2-1/2 in - 202.00
+BI Hex Nipple 3 in - 350.00
+BI Hex Nipple 4 in - 530.00
+
+PVC Saddle Clamp 63 x 1/2 - 250
+PVC Saddle Clamp 63 x 3/4 - 250
+PVC Saddle Clamp 63 x 1 - 250
+PVC Saddle Clamp 75 x 1/2 - 290
+PVC Saddle Clamp 75 x 3/4 - 290
+PVC Saddle Clamp 75 x 1 - 290
+PVC Saddle Clamp 110 x 1/2 - 395
+PVC Saddle Clamp 110 x 3/4 - 395
+PVC Saddle Clamp 110 x 1 - 395
+PVC Saddle Clamp 160 x 1/2 - 605
+PVC Saddle Clamp 160 x 3/4 - 605
+PVC Saddle Clamp 160 x 1 - 605
+PVC Saddle Clamp 225 x 1/2 - 950
+PVC Saddle Clamp 225 x 3/4 - 950
+PVC Saddle Clamp 225 x 1 - 950
+
+CI Saddle Clamp 3 x 2 - 500
+CI Saddle Clamp 4 x 2 - 635
+CI Saddle Clamp 6 x 2 - 910
+CI Saddle Clamp 8 x 2 - 1320
+CI Saddle Clamp 10 x 2 - 1945
+
+UPVC Coupling 2 in - 13.60
+UPVC Coupling 3 in - 28.60
+UPVC Coupling 4 in - 54.40
+
+UPVC Elbow 90 2 in - 27.20
+UPVC Elbow 90 3 in - 49.00
+UPVC Elbow 90 4 in - 61.60
+
+UPVC Elbow 45 2 in - 21.70
+UPVC Elbow 45 3 in - 39.40
+UPVC Elbow 45 4 in - 62.50
+
+UPVC Tee 2 in - 38.10
+UPVC Tee 3 in - 87.00
+UPVC Tee 4 in - 147.00
+
+UPVC Wye 2 in - 35.40
+UPVC Wye 3 in - 84.30
+UPVC Wye 4 in - 131.00
+
+UPVC Tee Reducer 3 x 2 - 81.60
+UPVC Tee Reducer 4 x 2 - 114.00
+UPVC Tee Reducer 4 x 3 - 125.10
+
+UPVC Wye Reducer 3 x 2 - 76.20
+UPVC Wye Reducer 4 x 2 - 109.00
+UPVC Wye Reducer 4 x 3 - 119.70
+
+UPVC Cleanout w/ O-ring 2 in - 21.80
+UPVC Cleanout w/ O-ring 3 in - 38.10
+UPVC Cleanout w/ O-ring 4 in - 64.00
+
+UPVC P-Trap w/ O-ring 2 in - 84.30
+UPVC P-Trap w/ O-ring 3 in - 150.00
+UPVC P-Trap w/ O-ring 4 in - 204.00
+
+UPVC Air Vent Cap 2 in - 19.20
+UPVC Air Vent Cap 3 in - 33.60
+UPVC Air Vent Cap 4 in - 56.00
+
+Drainage Non-Return Valve 4 in - 4950
+Wet Alarm Check Valve Groove 3 in - 45000
+Wet Alarm Check Valve Groove 4 in - 56000
+Wet Alarm Check Valve Groove 6 in - 65000
+Wet Alarm Check Valve Groove 8 in - 80000
+Foot Valve Flange 2 in - 2800
+Foot Valve Flange 2-1/2 in - 3500
+Foot Valve Flange 3 in - 4500
+Foot Valve Flange 4 in - 6000
+Foot Valve Flange 5 in - 9000
+Foot Valve Flange 6 in - 13000
+Foot Valve Flange 8 in - 20000
+
+Spring Loaded Foot Valve Flange 2 in - 3000
+Spring Loaded Foot Valve Flange 2-1/2 in - 3800
+Spring Loaded Foot Valve Flange 3 in - 5000
+Spring Loaded Foot Valve Flange 4 in - 6500
+Spring Loaded Foot Valve Flange 5 in - 10500
+Spring Loaded Foot Valve Flange 6 in - 14500
+Spring Loaded Foot Valve Flange 8 in - 22000
+
+Universal Flange Adapter 2 in - 1100
+Universal Flange Adapter 2-1/2 in - 1200
+Universal Flange Adapter 3 in - 1250
+Universal Flange Adapter 4 in - 1500
+Universal Flange Adapter 6 in - 2200
+Universal Flange Adapter 8 in - 2700
+Universal Flange Adapter 10 in - 4300
+Universal Flange Adapter 12 in - 5000
+
+PVC Restrained Flange Adapter 2 in - 2200
+PVC Restrained Flange Adapter 2-1/2 in - 2400
+PVC Restrained Flange Adapter 3 in - 2450
+PVC Restrained Flange Adapter 4 in - 3000
+PVC Restrained Flange Adapter 6 in - 4400
+PVC Restrained Flange Adapter 8 in - 6000
+PVC Restrained Flange Adapter 10 in - 11500
+PVC Restrained Flange Adapter 12 in - 12500
+
+Swing Check Valve Flange End 2 in - 4500
+Swing Check Valve Flange End 2-1/2 in - 5300
+Swing Check Valve Flange End 3 in - 6800
+Swing Check Valve Flange End 4 in - 8800
+Swing Check Valve Flange End 6 in - 16000
+Swing Check Valve Flange End 8 in - 26000
+Swing Check Valve Flange End 10 in - 42500
+Swing Check Valve Flange End 12 in - 55000
+
+Swing Check Valve with Counter Weight 2 in - 5500
+Swing Check Valve with Counter Weight 2-1/2 in - 6400
+Swing Check Valve with Counter Weight 3 in - 8200
+Swing Check Valve with Counter Weight 4 in - 10800
+Swing Check Valve with Counter Weight 6 in - 19000
+Swing Check Valve with Counter Weight 8 in - 31000
+Swing Check Valve with Counter Weight 10 in - 50000
+Swing Check Valve with Counter Weight 12 in - 65000
+
+STC Mechanical Coupling 2 in - 1150
+STC Mechanical Coupling 2-1/2 in - 1300
+STC Mechanical Coupling 3 in - 1500
+STC Mechanical Coupling 4 in - 2000
+STC Mechanical Coupling 6 in - 2990
+STC Mechanical Coupling 8 in - 4025
+STC Mechanical Coupling 10 in - 5200
+STC Mechanical Coupling 12 in - 6325
+
+Stainless Steel Flexible Coupling 2 in - 3200
+Stainless Steel Flexible Coupling 2-1/2 in - 3600
+Stainless Steel Flexible Coupling 3 in - 4800
+Stainless Steel Flexible Coupling 4 in - 6000
+Stainless Steel Flexible Coupling 6 in - 10000
+Stainless Steel Flexible Coupling 8 in - 13500
+Stainless Steel Flexible Coupling 10 in - 18000
+Stainless Steel Flexible Coupling 12 in - 26000
+
+Hubless Stainless Coupling 2 in - 165
+Hubless Stainless Coupling 3 in - 200
+Hubless Stainless Coupling 4 in - 230
+Hubless Stainless Coupling 6 in - 600
+Hubless Stainless Coupling 8 in - 850
+
+DI Mechanical Tee 2 in - 2900
+DI Mechanical Tee 2-1/2 in - 3600
+DI Mechanical Tee 3 in - 5600
+DI Mechanical Tee 4 in - 10000
+DI Mechanical Tee 6 in - 14000
+
+Butterfly Valve Lever Lug Type 2 in - 2000
+Butterfly Valve Lever Lug Type 2-1/2 in - 2300
+Butterfly Valve Lever Lug Type 3 in - 3000
+Butterfly Valve Lever Lug Type 4 in - 3600
+Butterfly Valve Lever Lug Type 5 in - 5300
+Butterfly Valve Lever Lug Type 6 in - 5400
+Butterfly Valve Lever Lug Type 8 in - 9000
+
+NRS Gate Valve Groove End 2 in - 5300
+NRS Gate Valve Groove End 2-1/2 in - 7000
+NRS Gate Valve Groove End 3 in - 8500
+NRS Gate Valve Groove End 4 in - 10500
+NRS Gate Valve Groove End 6 in - 17000
+NRS Gate Valve Groove End 8 in - 31500
+NRS Gate Valve Groove End 10 in - 45000
+NRS Gate Valve Groove End 12 in - 63000
+
+OS&Y Gate Valve Groove End 2 in - 7000
+OS&Y Gate Valve Groove End 2-1/2 in - 7500
+OS&Y Gate Valve Groove End 3 in - 9000
+OS&Y Gate Valve Groove End 4 in - 12500
+OS&Y Gate Valve Groove End 6 in - 21000
+OS&Y Gate Valve Groove End 8 in - 35000
+OS&Y Gate Valve Groove End 10 in - 55000
+OS&Y Gate Valve Groove End 12 in - 75000
+
+Y Strainer Groove 2 in - 1900
+Y Strainer Groove 2-1/2 in - 2900
+Y Strainer Groove 3 in - 4100
+Y Strainer Groove 4 in - 6100
+Y Strainer Groove 6 in - 9500
+Y Strainer Groove 8 in - 13500
+Y Strainer Groove 10 in - 46000
+Y Strainer Groove 12 in - 65000`;
+const parseSupplierPriceList=(text)=>text.split('\n').map((line,idx)=>{const cleaned=line.trim();if(!cleaned)return null;const match=cleaned.match(/^(.+?)\s+-\s+([\d,.]+)\s*$/);if(!match)return null;return {id:10000+idx,name:match[1].trim(),price:Number(match[2].replace(/,/g,'')),fixed:false};}).filter(Boolean);
+const supplierItems=parseSupplierPriceList(supplierPriceList);
 const manualQA=[{ q:'What is the payment term?', a:'50% payment to proceed with the order and 50% payment upon delivery/shipment.' },{ q:'What is price validity?', a:'5 days.' },{ q:'What is delivery schedule?', a:'2–5 days for on-stock items and 5–6 weeks for indent orders.' },{ q:'Are returns allowed?', a:'No return or replacement unless the item has factory defect.' }];
 const inferCategories=(name)=>{const n=name.toLowerCase(),set=new Set();if(n.includes('meter'))set.add('Meters');if(n.includes('hdpe'))set.add('HDPE');if(n.includes('ppr'))set.add('PPR');if(n.includes('upvc')||n.includes('pvc'))set.add('PVC/uPVC');if(n.includes('valve'))set.add('Valves');if(n.includes('flange'))set.add('Flanges');if(n.includes('fire')||n.includes('hydrant')||n.includes('siamese')||n.includes('mech groove'))set.add('Fire Protection');if(n.includes('bi ')||n.includes('gi '))set.add('BI/GI');if(!set.size)set.add('Accessories');return [...set];};
 const brandFromName=(name)=>['Ecotech','Aquajet','STC','Leviya'].find(b=>name.toLowerCase().includes(b.toLowerCase()))||'';
-const parseItem=(i)=>{const size=(i.name.match(/\d+(?:-\d+\/\d+|\/\d+|\.\d+)?\s*(?:mm|in)/i)||[''])[0];const material=(i.name.match(/(cast iron|brass|bi|gi|hdpe|ppr|upvc|pvc)/i)||[''])[0].toLowerCase();const type=(i.name.match(/(sdr\d+|sch\d+|class\s?\d+|threaded|flanged|welded|vertical|horizontal)/i)||[''])[0].toLowerCase();return {...i,size,material,type,brand:brandFromName(i.name),categories:i.categories?.length?i.categories:inferCategories(i.name)};};
-const parsedItems=items.map(parseItem);
+const parseItem=(i)=>{const size=(i.name.match(/\b\d+(?:-\d+\/\d+|\/\d+|\.\d+)?\s*(?:mm|in)\b/i)||[''])[0];const material=(i.name.match(/(cast iron|brass|bi|gi|hdpe|ppr|upvc|pvc)/i)||[''])[0].toLowerCase();const type=(i.name.match(/(sdr\d+|sch\d+|class\s?\d+|threaded|flanged|welded|vertical|horizontal)/i)||[''])[0].toLowerCase();return {...i,size,material,type,brand:brandFromName(i.name),categories:i.categories?.length?i.categories:inferCategories(i.name)};};
+const parsedItems=[...items,...supplierItems].map(parseItem);
 const dedupeItems=(arr)=>{const map=new Map();for(const item of arr){const key=[item.name.toLowerCase(),item.size,item.brand.toLowerCase(),item.material,item.type].join('|');const prev=map.get(key);if(!prev||item.price>prev.price)map.set(key,item);}return [...map.values()];};
 const normalizeItems=dedupeItems(parsedItems);
 const categories=['All',...new Set(normalizeItems.flatMap(i=>i.categories))];
