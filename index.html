@@ -393,7 +393,13 @@ const items = [
 { id: 340, name: 'Wet Alarm Check Valve 3 in', price: 45000, fixed: false },
 { id: 341, name: 'Wet Alarm Check Valve 4 in', price: 56000, fixed: false },
 { id: 342, name: 'Wet Alarm Check Valve 6 in', price: 65000, fixed: false },
-{ id: 343, name: 'Wet Alarm Check Valve 8 in', price: 80000, fixed: false }
+{ id: 343, name: 'Wet Alarm Check Valve 8 in', price: 80000, fixed: false },
+{ id: 344, name: 'DI Flow Meter F/F w/ SRF & BNG Standard, Woltman Brand, 2 in', price: 7625, fixed: false },
+{ id: 345, name: 'DI Flow Meter F/F w/ SRF & BNG Standard, Woltman Brand, 2-1/2 in', price: 8822, fixed: false },
+{ id: 346, name: 'DI Flow Meter F/F w/ SRF & BNG Standard, Woltman Brand, 4 in', price: 11862, fixed: false },
+{ id: 347, name: 'DI Flow Meter F/F w/ SRF & BNG Standard, Woltman Brand, 6 in', price: 16913, fixed: false },
+{ id: 348, name: 'DI Flow Meter F/F w/ SRF & BNG Standard, Woltman Brand, 8 in', price: 22914, fixed: false },
+{ id: 349, name: 'DI Flow Meter F/F w/ SRF & BNG Standard, Woltman Brand, 10 in', price: 42560, fixed: false }
 ];
 const supplierPriceList = String.raw`Elbow 45 2 in - 151
 Elbow 45 2-1/2 in - 207
@@ -838,7 +844,7 @@ const parseSupplierPriceList=(text)=>text.split('\n').map((line,idx)=>{const cle
 const supplierItems=parseSupplierPriceList(supplierPriceList);
 const manualQA=[{ q:'What is the payment term?', a:'50% payment to proceed with the order and 50% payment upon delivery/shipment.' },{ q:'What is price validity?', a:'5 days.' },{ q:'What is delivery schedule?', a:'2–5 days for on-stock items and 5–6 weeks for indent orders.' },{ q:'Are returns allowed?', a:'No return or replacement unless the item has factory defect.' }];
 const inferCategories=(name)=>{const n=name.toLowerCase(),set=new Set();if(n.includes('meter'))set.add('Meters');if(n.includes('hdpe'))set.add('HDPE');if(n.includes('ppr'))set.add('PPR');if(n.includes('upvc')||n.includes('pvc'))set.add('PVC/uPVC');if(n.includes('valve'))set.add('Valves');if(n.includes('flange'))set.add('Flanges');if(n.includes('fire')||n.includes('hydrant')||n.includes('siamese')||n.includes('mech groove'))set.add('Fire Protection');if(n.includes('bi ')||n.includes('gi '))set.add('BI/GI');if(!set.size)set.add('Accessories');return [...set];};
-const brandFromName=(name)=>['Ecotech','Aquajet','STC','Leviya'].find(b=>name.toLowerCase().includes(b.toLowerCase()))||'';
+const brandFromName=(name)=>['Ecotech','Aquajet','STC','Leviya','Woltman'].find(b=>name.toLowerCase().includes(b.toLowerCase()))||'';
 const parseItem=(i)=>{const size=(i.name.match(/\b\d+(?:-\d+\/\d+|\/\d+|\.\d+)?\s*(?:mm|in)\b/i)||[''])[0];const material=(i.name.match(/(cast iron|brass|bi|gi|hdpe|ppr|upvc|pvc)/i)||[''])[0].toLowerCase();const type=(i.name.match(/(sdr\d+|sch\d+|class\s?\d+|threaded|flanged|welded|vertical|horizontal)/i)||[''])[0].toLowerCase();return {...i,size,material,type,brand:brandFromName(i.name),categories:i.categories?.length?i.categories:inferCategories(i.name)};};
 const parsedItems=[...items,...supplierItems].map(parseItem);
 const dedupeItems=(arr)=>{const map=new Map();for(const item of arr){const key=[item.name.toLowerCase(),item.size,item.brand.toLowerCase(),item.material,item.type].join('|');const prev=map.get(key);if(!prev||item.price>prev.price)map.set(key,item);}return [...map.values()];};
