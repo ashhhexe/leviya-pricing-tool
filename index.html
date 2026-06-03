@@ -41,6 +41,23 @@
       .auto-quote-input { width: 100%; min-height: 130px; border: 1px solid #cbd5e1; border-radius: .5rem; padding: .65rem; font-size: .95rem; font-family: inherit; }
       .auto-quote-actions { display: flex; gap: .45rem; flex-wrap: wrap; margin: .6rem 0; }
       .auto-quote-table td input, .auto-quote-table td select { width: 100%; padding: .4rem; font-size: .85rem; }
+
+      .specs-layout { display: grid; grid-template-columns: minmax(220px, 0.8fr) minmax(320px, 1.2fr); gap: .75rem; align-items: start; }
+      .specs-search { width: 100%; margin-bottom: .6rem; }
+      .spec-list { display: grid; gap: .5rem; max-height: 68vh; overflow: auto; padding-right: .25rem; }
+      .spec-card { display: grid; gap: .25rem; width: 100%; text-align: left; background: #f8fafc; color: #0f172a; border: 1px solid #cbd5e1; }
+      .spec-card.active { background: #dbeafe; border-color: #2563eb; }
+      .spec-card-title { font-weight: 800; }
+      .spec-detail { display: grid; gap: .65rem; }
+      .spec-detail h3 { margin: 0; }
+      .spec-copy-row { display: flex; gap: .45rem; flex-wrap: wrap; }
+      .spec-size-list { display: grid; gap: .3rem; margin: 0; padding: 0; list-style: none; }
+      .spec-size-list li { display: flex; justify-content: space-between; gap: .75rem; border: 1px solid #e2e8f0; border-radius: .5rem; padding: .45rem .55rem; background: #f8fafc; }
+      .spec-image-wrap { border: 1px solid #cbd5e1; border-radius: .75rem; background: #f8fafc; overflow: hidden; }
+      .spec-image-wrap img { display: block; width: 100%; max-height: none; object-fit: contain; background: white; cursor: zoom-in; }
+      .spec-placeholder { min-height: 360px; display: grid; place-items: center; text-align: center; color: #64748b; padding: 1rem; border: 2px dashed #cbd5e1; background: linear-gradient(135deg,#f8fafc,#e2e8f0); }
+      .spec-related { display: grid; gap: .25rem; margin: 0; padding-left: 1.1rem; max-height: 150px; overflow: auto; }
+      @media (max-width: 760px) { .specs-layout { grid-template-columns: 1fr; } }
     </style>
   </head>
   <body>
@@ -884,29 +901,91 @@ const parseItem=(i)=>{const size=(i.name.match(/\b\d+(?:-\d+\/\d+|\/\d+|\.\d+)?\
 const parsedItems=[...items,...supplierItems].map(parseItem);
 const dedupeItems=(arr)=>{const map=new Map();for(const item of arr){const key=[item.name.toLowerCase(),item.size,item.brand.toLowerCase(),item.material,item.type].join('|');const prev=map.get(key);if(!prev||item.price>prev.price)map.set(key,item);}return [...map.values()];};
 const normalizeItems=dedupeItems(parsedItems);
+const specs = [
+{
+id: "hdpe-pipe-sdr11",
+name: "HDPE Pipe SDR 11",
+keywords: ["hdpe", "pipe", "sdr11", "sdr 11", "polyethylene"],
+sizes: [
+{ size: "20mm x 100m", price: 1633 },
+{ size: "50mm x 60m", price: 6192 },
+{ size: "75mm x 60m", price: 13512 },
+{ size: "100mm x 6m", price: 2870 }
+],
+notes: "PE/HDPE items are fixed/no markup unless changed manually.",
+image: ""
+}
+];
 const categories=['All',...new Set(normalizeItems.flatMap(i=>i.categories))];
 const toCurrency=(v)=>new Intl.NumberFormat('en-PH',{style:'currency',currency:'PHP'}).format(v);
 const markedPrice=(item,m)=>item.fixed?item.price:item.price*(1+m/100);
 const mmEquivalent=(name)=>{const m=name.match(/(\d+(?:\.\d+)?)\s*in/i);if(!m)return '';return `${(Number(m[1])*25.4).toFixed(1)} mm`;};
-const state={activeCategory:'All',copiedId:null,quote:new Map(),discountPercent:0,calcDisplay:'0',z:2200,autoQuoteRows:[]};
+const state={activeCategory:'All',copiedId:null,quote:new Map(),discountPercent:0,calcDisplay:'0',z:2200,autoQuoteRows:[],selectedSpecId:specs[0]?.id||null,specCopiedId:null};
 const el={search:document.getElementById('search'),markup:document.getElementById('markup'),grid:document.getElementById('item-grid'),categories:document.getElementById('category-bar'),dock:document.getElementById('dock'),widgets:document.getElementById('widgets')};
-const widgets={quotation:{title:'Quotation',icon:'🧾',default:{w:980,h:430,x:120,y:90}},calculator:{title:'Calculator',icon:'🧮',default:{w:320,h:360,x:300,y:120}},conversion:{title:'Conversion Calculator',icon:'📏',default:{w:450,h:430,x:260,y:110}},qa:{title:'Q&A Helper',icon:'❓',default:{w:540,h:360,x:220,y:120}},autoQuote:{title:'Auto Quote Parser',icon:'🤖',default:{w:1040,h:520,x:180,y:80}}};
-const dockItems=[{id:'quotation',label:'Quotation',icon:'🧾'},{id:'calculator',label:'Calculator',icon:'🧮'},{id:'conversion',label:'Conversion Calculator',icon:'📏'},{id:'qa',label:'Q&A Helper',icon:'❓'},{id:'autoQuote',label:'Auto Quote Parser',icon:'🤖'}];
+const widgets={quotation:{title:'Quotation',icon:'🧾',default:{w:980,h:430,x:120,y:90}},calculator:{title:'Calculator',icon:'🧮',default:{w:320,h:360,x:300,y:120}},conversion:{title:'Conversion Calculator',icon:'📏',default:{w:450,h:430,x:260,y:110}},qa:{title:'Q&A Helper',icon:'❓',default:{w:540,h:360,x:220,y:120}},autoQuote:{title:'Auto Quote Parser',icon:'🤖',default:{w:1040,h:520,x:180,y:80}},specs:{title:'Specs',icon:'📄',default:{w:920,h:640,x:210,y:70}}};
+const dockItems=[{id:'quotation',label:'Quotation',icon:'🧾'},{id:'calculator',label:'Calculator',icon:'🧮'},{id:'conversion',label:'Conversion Calculator',icon:'📏'},{id:'qa',label:'Q&A Helper',icon:'❓'},{id:'autoQuote',label:'Auto Quote Parser',icon:'🤖'},{id:'specs',label:'Specs',icon:'📄'}];
 const inchEquivalent=(name)=>{const m=name.match(/(\d+(?:\.\d+)?)\s*mm\b/i);if(!m)return '';return `${(Number(m[1])/25.4).toFixed(2)} in`;};
 const searchIndex=(item)=>[item.name,item.size,item.brand,item.material,item.type,...item.categories,item.keywords,item.notes,mmEquivalent(item.name),inchEquivalent(item.name)].filter(Boolean).join(' ').toLowerCase();
 function renderCategories(){el.categories.innerHTML='';categories.forEach(c=>{const b=document.createElement('button');b.className=`category-btn${c===state.activeCategory?' active':''}`;b.textContent=c;b.onclick=()=>{state.activeCategory=c;renderItems();};el.categories.appendChild(b);});}
 function toggleQuote(item){if(state.quote.has(item.id))state.quote.delete(item.id);else state.quote.set(item.id,{itemId:item.id,qty:1,unit:'pc'});renderItems();if(document.getElementById('widget-quotation')&&!document.getElementById('widget-quotation').hidden)renderQuotation();}
 function renderItems(){const rawQuery=el.search.value.toLowerCase();const tokens=[...new Set(rawQuery.split(/\s+/).map(t=>t.trim()).filter(Boolean))];const m=Number(el.markup.value)||0;const matched=normalizeItems.filter(item=>{if(state.activeCategory!=='All'&&!item.categories.includes(state.activeCategory))return false;if(!tokens.length)return true;const haystack=searchIndex(item);return tokens.some(token=>haystack.includes(token));});const seen=new Set();const shown=matched.filter(item=>{if(seen.has(item.id))return false;seen.add(item.id);return true;});el.grid.innerHTML='';shown.forEach(item=>{const selected=state.quote.has(item.id);const card=document.createElement('article');card.className='item-card';card.innerHTML=`<h2 style="font-size:1rem;margin:0">${item.name}</h2><div style="display:flex;gap:.35rem;flex-wrap:wrap">${item.categories.map(c=>`<span class='small-note' style='background:#e2e8f0;padding:.12rem .45rem;border-radius:999px'>${c}</span>`).join('')}${item.brand?`<span class='small-note' style='background:#dcfce7;padding:.12rem .45rem;border-radius:999px'>Brand: ${item.brand}</span>`:''}${item.fixed?`<span class='small-note' style='background:#fee2e2;padding:.12rem .45rem;border-radius:999px'>SP Locked</span>`:''}</div><p class='small-note'>Size: ${item.size||'N/A'} ${mmEquivalent(item.name)?`• ${mmEquivalent(item.name)}`:''}</p><p>Base: ${toCurrency(item.price)}</p><p>Unit Cost: <strong>${toCurrency(markedPrice(item,m))}</strong></p><div class='item-actions'><button data-copy>${state.copiedId===item.id?'Copied!':'Copy'}</button><button class="toggle-btn ${selected?'selected':''}" data-quote>${selected?'Remove':'Add to Quote'}</button></div>`;card.querySelector('[data-copy]').onclick=async()=>{try{await navigator.clipboard.writeText(`${item.name}	${toCurrency(markedPrice(item,m))}`);}catch{}state.copiedId=item.id;renderItems();setTimeout(()=>{state.copiedId=null;renderItems();},900);};card.querySelector('[data-quote]').onclick=()=>toggleQuote(item);el.grid.appendChild(card);});}
-function renderDock(){el.dock.innerHTML='';dockItems.forEach(d=>{const b=document.createElement('button');b.className='dock-btn';b.title=d.label;b.textContent=d.icon;b.onclick=()=>openWidget(d.id);el.dock.appendChild(b);});}
+function renderDock(){el.dock.innerHTML='';dockItems.forEach(d=>{const b=document.createElement('button');b.className='dock-btn';b.title=d.label;b.setAttribute('aria-label',d.label);b.textContent=d.icon;b.onclick=()=>openWidget(d.id);el.dock.appendChild(b);});}
 function widgetShell(key){const w=widgets[key],id=`widget-${key}`;if(document.getElementById(id))return document.getElementById(id);const n=document.createElement('article');n.id=id;n.className='widget';n.hidden=true;n.innerHTML=`<div class="widget-header"><strong>${w.title}</strong><div class="widget-actions"><button data-reset>Reset</button><button data-max>Maximize</button><button data-close>✕</button></div></div><div class="widget-body"></div>`;el.widgets.appendChild(n);wireWidget(n,key);applyDefaultSize(n,key);return n;}
 function applyDefaultSize(node,key){const d=widgets[key].default;node.style.width=d.w+'px';node.style.height=d.h+'px';node.style.left=d.x+'px';node.style.top=d.y+'px';node.dataset.max='0';}
-function openWidget(key){const n=widgetShell(key);n.hidden=false;if(key==='quotation')renderQuotation();if(key==='calculator')renderCalculator();if(key==='conversion')renderConversion();if(key==='qa')renderQA();if(key==='autoQuote')renderAutoQuote();}
+function openWidget(key){const n=widgetShell(key);n.hidden=false;if(key==='quotation')renderQuotation();if(key==='calculator')renderCalculator();if(key==='conversion')renderConversion();if(key==='qa')renderQA();if(key==='autoQuote')renderAutoQuote();if(key==='specs')renderSpecs();}
 function wireWidget(node,key){const header=node.querySelector('.widget-header');let sx=0,sy=0,ox=0,oy=0,drag=false;header.onmousedown=(e)=>{if(e.target.closest('button'))return;drag=true;sx=e.clientX;sy=e.clientY;ox=node.offsetLeft;oy=node.offsetTop;};window.addEventListener('mousemove',e=>{if(!drag)return;node.style.left=(ox+e.clientX-sx)+'px';node.style.top=(oy+e.clientY-sy)+'px';});window.addEventListener('mouseup',()=>drag=false);node.querySelector('[data-close]').onclick=()=>node.hidden=true;node.querySelector('[data-reset]').onclick=()=>applyDefaultSize(node,key);node.querySelector('[data-max]').onclick=()=>{if(node.dataset.max==='1'){const p=JSON.parse(node.dataset.prev);Object.assign(node.style,p);node.dataset.max='0';}else{node.dataset.prev=JSON.stringify({left:node.style.left,top:node.style.top,width:node.style.width,height:node.style.height});node.style.left='16px';node.style.top='16px';node.style.width=(window.innerWidth-32)+'px';node.style.height=(window.innerHeight-32)+'px';node.dataset.max='1';}};}
 function renderCalculator(){const n=document.querySelector('#widget-calculator .widget-body');const buttons=['7','8','9','/','4','5','6','*','1','2','3','-','0','.','=','+'];n.innerHTML=`<div class='calc-display'>${state.calcDisplay}</div><div class='calc-grid'>${buttons.map(b=>`<button data-calc='${b}'>${b}</button>`).join('')}<button data-calc='C'>C</button></div>`;n.querySelectorAll('[data-calc]').forEach(b=>b.onclick=()=>{const v=b.dataset.calc;if(v==='C')state.calcDisplay='0';else if(v==='='){try{state.calcDisplay=String(Function(`return (${state.calcDisplay})`)());}catch{state.calcDisplay='Error';}}else state.calcDisplay=(state.calcDisplay==='0'||state.calcDisplay==='Error')?v:state.calcDisplay+v;renderCalculator();});}
 function renderQuotation(){const n=document.querySelector('#widget-quotation .widget-body');const m=Number(el.markup.value)||0;const rows=[...state.quote.values()].map((r,idx)=>{const item=normalizeItems.find(x=>x.id===r.itemId);const unitCost=markedPrice(item,m),amount=r.qty*unitCost;return {idx:idx+1,...r,item,unitCost,amount};});const subtotal=rows.reduce((s,r)=>s+r.amount,0),discountAmount=subtotal*(state.discountPercent/100),grand=subtotal-discountAmount;n.innerHTML=`<div style='display:flex;gap:.4rem;margin-bottom:.5rem'><button data-copy-quote>Copy quotation table</button><button data-clear style='background:#475569'>Clear quotation</button></div><table><thead><tr><th>ITEM</th><th>QTY</th><th>UNIT</th><th>DESCRIPTION</th><th>UNIT COST</th><th>AMOUNT</th><th></th></tr></thead><tbody>${rows.map(r=>`<tr><td>${r.idx}</td><td><input type='number' min='0' step='1' value='${r.qty}' data-qty='${r.itemId}'/></td><td><input value='${r.unit}' data-unit='${r.itemId}'/></td><td>${r.item.name}</td><td class='money'>${toCurrency(r.unitCost)}</td><td class='money'>${toCurrency(r.amount)}</td><td><button data-remove='${r.itemId}'>Remove</button></td></tr>`).join('')}</tbody></table><div class='quotation-summary'><div>SUBTOTAL: <strong>${toCurrency(subtotal)}</strong></div><label>Discount (%) <input id='discount' type='number' step='0.01' min='0' max='100' value='${state.discountPercent}'/></label><div>Discount Amount: <strong>${toCurrency(discountAmount)}</strong></div><div>GRAND TOTAL: <strong>${toCurrency(grand)}</strong></div></div>`;
 n.querySelectorAll('[data-remove]').forEach(b=>b.onclick=()=>{state.quote.delete(Number(b.dataset.remove));renderQuotation();renderItems();});n.querySelectorAll('[data-qty]').forEach(i=>i.oninput=()=>{const id=Number(i.dataset.qty),r=state.quote.get(id);r.qty=Math.max(0,Number(i.value)||0);state.quote.set(id,r);renderQuotation();});n.querySelectorAll('[data-unit]').forEach(i=>i.oninput=()=>{const id=Number(i.dataset.unit),r=state.quote.get(id);r.unit=i.value||'pc';state.quote.set(id,r);});n.querySelector('#discount').oninput=(e)=>{state.discountPercent=Math.max(0,Number(e.target.value)||0);renderQuotation();};n.querySelector('[data-clear]').onclick=()=>{state.quote.clear();renderQuotation();renderItems();};n.querySelector('[data-copy-quote]').onclick=async()=>{const lines=['ITEM	QTY	UNIT	DESCRIPTION	UNIT COST	AMOUNT'];rows.forEach(r=>lines.push(`${r.idx}	${r.qty}	${r.unit}	${r.item.name}	${r.unitCost.toFixed(2)}	${r.amount.toFixed(2)}`));lines.push(`				SUBTOTAL	${subtotal.toFixed(2)}`);lines.push(`				DISCOUNT (${state.discountPercent}%)	${discountAmount.toFixed(2)}`);lines.push(`				GRAND TOTAL	${grand.toFixed(2)}`);await navigator.clipboard.writeText(lines.join('\n'));};}
 function renderConversion(){const n=document.querySelector('#widget-conversion .widget-body');n.innerHTML=`<label>Value <input id='conv-val' type='number' step='any' value='1'></label><label>Convert <select id='conv-type'><option value='mm_in'>mm to inches</option><option value='in_mm'>inches to mm</option><option value='cm_in'>cm to inches</option><option value='in_cm'>inches to cm</option><option value='m_ft'>meters to feet</option><option value='ft_m'>feet to meters</option></select></label><button id='conv-run'>Compute</button><div class='qa-result' id='conv-out'>Result: -</div><div class='small-note'>Approximate nominal pipe size only, verify specs.</div><table><tbody><tr><td>25mm</td><td>≈ 1 in</td></tr><tr><td>40mm</td><td>≈ 1-1/2 in</td></tr><tr><td>50mm</td><td>≈ 2 in</td></tr><tr><td>65mm</td><td>≈ 2-1/2 in</td></tr><tr><td>80mm</td><td>≈ 3 in</td></tr><tr><td>100mm</td><td>≈ 4 in</td></tr><tr><td>150mm</td><td>≈ 6 in</td></tr><tr><td>200mm</td><td>≈ 8 in</td></tr><tr><td>250mm</td><td>≈ 10 in</td></tr><tr><td>300mm</td><td>≈ 12 in</td></tr></tbody></table>`;n.querySelector('#conv-run').onclick=()=>{const v=Number(n.querySelector('#conv-val').value)||0,t=n.querySelector('#conv-type').value;const map={mm_in:v/25.4,in_mm:v*25.4,cm_in:v/2.54,in_cm:v*2.54,m_ft:v*3.28084,ft_m:v/3.28084};n.querySelector('#conv-out').textContent=`Result: ${map[t].toFixed(4)}`;};}
 function renderQA(){const n=document.querySelector('#widget-qa .widget-body');n.innerHTML=`<label>Manual FAQ search <input id='qa-input' placeholder='Type your question'/></label><button data-ask>Search Answer</button><div id='qa-result' class='qa-result'></div>`;const result=n.querySelector('#qa-result');n.querySelector('[data-ask]').onclick=()=>{const q=n.querySelector('#qa-input').value.trim().toLowerCase();const hit=manualQA.find(x=>q&&(x.q.toLowerCase().includes(q)||q.includes(x.q.toLowerCase().replace(/[?]/g,''))));if(hit)result.innerHTML=`<strong>Answer:</strong> ${hit.a}<br><em>Source: Manual Info</em>`;else result.innerHTML=`<strong>Answer:</strong> No direct manual match found. Verify before sending to client.<br><em>Source: Not verified / Needs checking</em>`;};}
+
+const escapeHTML=(value)=>String(value??'').replace(/[&<>'"]/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[ch]));
+const specSizeText=(spec)=>spec.sizes?.length?spec.sizes.map(s=>`${s.size}${s.price!=null?` - ${toCurrency(s.price)}`:''}`).join('\n'):'No sizes listed';
+const specCopyText=(spec)=>`${spec.name}\n${specSizeText(spec)}\n${spec.notes?`Notes: ${spec.notes}`:''}`.trim();
+function copyText(text){return navigator.clipboard?.writeText(text).catch(()=>{})||Promise.resolve();}
+function specSearchIndex(spec){
+const sizeText=(spec.sizes||[]).map(s=>`${s.size} ${s.price??''}`).join(' ');
+const linked=relatedSpecProducts(spec).map(p=>`${p.name} ${p.size} ${p.brand} ${p.material} ${p.type}`).join(' ');
+const base=[spec.name,(spec.keywords||[]).join(' '),sizeText,spec.notes,linked].filter(Boolean).join(' ').toLowerCase();
+return `${base} ${base.replace(/\s+/g,'')}`;
+}
+function specMatchesQuery(spec,query){
+const terms=normalizeQuery(query).split(' ').filter(Boolean);
+if(!terms.length)return true;
+const hay=specSearchIndex(spec);
+return terms.every(term=>hay.includes(term)||hay.includes(term.replace(/\s+/g,'')));
+}
+function relatedSpecProducts(spec){
+const keywords=(spec.keywords||[]).map(k=>k.toLowerCase());
+const important=keywords.filter(k=>!/^sdr\s?\d+$/.test(k));
+return normalizeItems.filter(item=>{
+const hay=searchIndex(item);
+const hasKeyword=important.some(k=>hay.includes(k));
+const hasSdr=keywords.filter(k=>/^sdr\s?\d+$/.test(k)).every(k=>hay.replace(/\s+/g,'').includes(k.replace(/\s+/g,'')));
+return hasKeyword&&hasSdr;
+}).slice(0,10);
+}
+function openSpecImage(src){if(!src)return;window.open(src,'_blank','noopener,noreferrer');}
+function renderSpecs(){
+const n=document.querySelector('#widget-specs .widget-body');
+const existing=n.querySelector('#spec-search')?.value||'';
+const visible=specs.filter(spec=>specMatchesQuery(spec,existing));
+if(!visible.some(spec=>spec.id===state.selectedSpecId)&&visible[0])state.selectedSpecId=visible[0].id;
+const selected=specs.find(spec=>spec.id===state.selectedSpecId)||visible[0]||specs[0];
+const related=selected?relatedSpecProducts(selected):[];
+n.innerHTML=`<label>Search specs <input id="spec-search" class="specs-search" type="search" placeholder="Try: hdpe sdr 11, 100mm, polyethylene pipe" value="${escapeHTML(existing)}" /></label><div class="specs-layout"><div><div class="small-note" style="margin-bottom:.45rem">${visible.length} reference spec${visible.length===1?'':'s'} found. Specs are reference pages only; product prices remain in the main pricelist.</div><div class="spec-list">${visible.map(spec=>`<button class="spec-card ${spec.id===selected?.id?'active':''}" data-spec-id="${escapeHTML(spec.id)}"><span class="spec-card-title">${escapeHTML(spec.name)}</span><span class="small-note">${escapeHTML((spec.keywords||[]).join(' • '))}</span><span class="small-note">${(spec.sizes||[]).length} size${(spec.sizes||[]).length===1?'':'s'}</span></button>`).join('')||'<div class="small-note">No specs match this search.</div>'}</div></div><div class="spec-detail">${selected?`<h3>${escapeHTML(selected.name)}</h3><div class="spec-copy-row"><button data-copy-spec>${state.specCopiedId===selected.id?'Copied!':'Copy item/spec text'}</button>${selected.image?`<button data-open-spec-image>Open full image</button>`:'<button disabled style="background:#94a3b8;cursor:not-allowed">Open full image</button>'}</div><div><strong>Available sizes and prices</strong><ul class="spec-size-list">${(selected.sizes||[]).map(size=>`<li><span>${escapeHTML(size.size)}</span><strong>${size.price!=null?toCurrency(size.price):'Price N/A'}</strong></li>`).join('')||'<li><span>No sizes listed yet</span><strong>Price N/A</strong></li>'}</ul></div><div><strong>Notes/specification details</strong><p class="small-note">${escapeHTML(selected.notes||'No notes added yet.')}</p></div><div><strong>Linked pricelist references</strong><p class="small-note">${related.length?'Matching pricelist items are shown for reference only; specs do not duplicate or replace products.':'No matching pricelist products found yet.'}</p>${related.length?`<ul class="spec-related">${related.map(item=>`<li>${escapeHTML(item.name)} — ${toCurrency(item.price)}</li>`).join('')}</ul>`:''}</div><div><strong>Spec sheet image</strong><div class="spec-image-wrap">${selected.image?`<img src="${escapeHTML(selected.image)}" alt="${escapeHTML(selected.name)} spec sheet" data-open-spec-image />`:'<div class="spec-placeholder"><div><strong>No spec image yet</strong><br>Add a local file path, base64 data URL, or file name to the spec image field later. The panel will show it full-width here.</div></div>'}</div></div>`:'<p class="small-note">Select a spec to view details.</p>'}</div></div>`;
+n.querySelector('#spec-search').oninput=()=>renderSpecs();
+n.querySelectorAll('[data-spec-id]').forEach(btn=>btn.onclick=()=>{state.selectedSpecId=btn.dataset.specId;renderSpecs();});
+n.querySelectorAll('[data-open-spec-image]').forEach(btn=>btn.onclick=()=>openSpecImage(selected?.image));
+const copy=n.querySelector('[data-copy-spec]');
+if(copy)copy.onclick=async()=>{
+await copyText(specCopyText(selected));
+state.specCopiedId=selected.id;
+renderSpecs();
+setTimeout(()=>{state.specCopiedId=null;if(document.querySelector('#widget-specs:not([hidden])'))renderSpecs();},900);
+};
+}
 function normalizeQuery(text){return text.toLowerCase().replace(/[\"']/g,' ').replace(/[^a-z0-9\/\.\s-]/g,' ').replace(/\s+/g,' ').trim();}
 const inchToMmMap={0.5:'15',0.75:'20',1:'25',1.25:'32',1.5:'40',2:'50',2.5:'65',3:'80',4:'100',5:'125',6:'150',8:'200',10:'250',12:'300'};
 function parseClientLine(line){const raw=line.trim();if(!raw)return null;const m=raw.match(/^(\d+(?:\.\d+)?)\s+(.+)$/);return {qty:m?Number(m[1]):1,text:m?m[2].trim():raw,original:raw};}
